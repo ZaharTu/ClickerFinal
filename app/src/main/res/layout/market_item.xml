@@ -26,8 +26,8 @@
                 android:layout_margin="4dp"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="4dp" >
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/Market_Image"

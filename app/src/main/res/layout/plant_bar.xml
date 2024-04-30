@@ -39,6 +39,7 @@
                 android:fontFamily="@font/molot"
                 android:text="TextView"
                 android:textSize="15sp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/Plant_minus_button"
                 app:layout_constraintStart_toEndOf="@+id/ImageCard" />
 

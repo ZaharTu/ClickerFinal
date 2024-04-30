@@ -25,17 +25,17 @@
                 android:layout_margin="4dp"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                >
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerInside"
                     android:id="@+id/Help_Image"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
+                    android:adjustViewBounds="true"
                     android:background="@color/BackMarketItemImage"
                     android:foreground="@drawable/okantovka_recyclerview_main"
+                    android:scaleType="centerInside"
                     app:srcCompat="@drawable/shovel" />
             </androidx.cardview.widget.CardView>
 
