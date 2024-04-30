@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/ProgressBar">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imagecard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="4dp" >
+
+                <ImageView
+                    android:id="@+id/Market_Image"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="@color/BackMarketItemImage"
+                    android:foreground="@drawable/okantovka_recyclerview_main"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/shovel" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/Market_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/molot"
+                android:text="Name"
+                android:textColor="@color/text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imagecard"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/Market_Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/abc"
+                android:text="hint"
+                android:textColor="@color/Hint"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagecard"
+                app:layout_constraintTop_toBottomOf="@+id/Market_Name" />
+
+            <TextView
+                android:id="@+id/Market_Cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="48$"
+                android:textColor="@color/CostMarketItem"
+                android:textSize="18sp"
+                android:fontFamily="@font/abc"
+                app:layout_constraintBottom_toTopOf="@+id/Market_Count"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/Market_Buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_design"
+                android:text="Buy"
+                android:fontFamily="@font/abc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/Market_Count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 покупок"
+                android:textColor="@color/CostMarketItem"
+                android:textSize="15sp"
+                android:fontFamily="@font/abc"
+                app:layout_constraintBottom_toTopOf="@+id/Market_Buy"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="5dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
