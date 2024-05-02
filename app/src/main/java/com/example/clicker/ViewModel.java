@@ -32,6 +32,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
     public void LoadOfSave(){
         save = new Save(mcontext);
         setBalanceRes(save.getBalanceRes());
+        liveDataBalance.postValue(balanceRes);
     }
     public void SaveToSave(){
         save.saveBalanceRes(balanceRes);
@@ -57,7 +58,6 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         }
         return liveDataPlants;
     }
-
     private void loadPlants() {
         plantArrayListSetter=new PlantArrayListSetter(mcontext, balanceRes.getMarketPos(3));
         plants=plantArrayListSetter.getPlant_Array();
@@ -109,6 +109,9 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
     }
     private void loadItems() {
         items=new ItemArrayListSetter(mcontext, balanceRes.getMarket()).getItem_Array();
+        for (int i = 0; i < items.size(); i++) {
+            items.get(i).IncrCost();
+        }
         liveDataMarket.setValue(items);
     }
     public boolean incrSlavesPos(int position){
@@ -141,7 +144,6 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         plants.get(position).setProgressBar(progressBar);
         liveDataPlants.setValue(plants);
     }
-
     public void incrCountBuy(int position) {
         int cost = items.get(position).getCost();
         if (items != null && position >= 0 && position < items.size() && balanceRes.balance>=cost) {
@@ -150,6 +152,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                     if (balanceRes.getMarketPos(3)<3){
                         decrBalance(cost);
                         items.get(position).IncrCountBuy();
+                        items.get(position).IncrCost();
                         liveDataMarket.setValue(items);
                         incrMarket(position);
                         loadPlants();
@@ -159,6 +162,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                     if (balanceRes.getMarketPos(1)<100){
                         decrBalance(cost);
                         items.get(position).IncrCountBuy();
+                        items.get(position).IncrCost();
                         liveDataMarket.setValue(items);
                         incrMarket(position);
                     }
@@ -166,6 +170,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                 case 2:
                     decrBalance(cost);
                     items.get(position).IncrCountBuy();
+                    items.get(position).IncrCost();
                     liveDataMarket.setValue(items);
                     incrMarket(position);
                     balanceRes.usableSlave++;
@@ -173,6 +178,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
                     break;
                 default:
                     decrBalance(cost);
+                    items.get(position).IncrCost();
                     items.get(position).IncrCountBuy();
                     liveDataMarket.setValue(items);
                     incrMarket(position);
@@ -183,11 +189,11 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
     public void incrBalanceClick(){
         double chance;
         double randomd=random.nextDouble();
-        if (balanceRes.getMarketPos(1)>100){
+        if (balanceRes.getMarketPos(1)>50){
             chance=0.5;
         }
         else{
-            chance= balanceRes.getMarketPos(1)*0.005;
+            chance= balanceRes.getMarketPos(1)*0.01;
         }
         if (randomd<=chance){
             balanceRes.balance+=(1+ balanceRes.getMarketPos(0))*2;
@@ -197,7 +203,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         liveDataBalance.setValue(balanceRes);
     }
     public void incrGatherPlant(){
-        balanceRes.gather+=5*(balanceRes.getMarketPos(4)+1);
+        balanceRes.gather+=10*(balanceRes.getMarketPos(4)+1);
         liveDataBalance.postValue(balanceRes);
     }
     public void incrBalanceGather(){
@@ -215,6 +221,4 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         balanceRes.market[position]++;
         liveDataBalance.setValue(balanceRes);
     }
-
-
 }

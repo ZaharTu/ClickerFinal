@@ -4,12 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.clicker.databinding.MarketItemBinding;
 
 import java.util.ArrayList;
 
@@ -30,7 +29,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>{
     public ItemAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mcontext);
         View view =layoutInflater.inflate(R.layout.market_item,parent,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(MarketItemBinding.bind(view));
     }
     public interface OnButtonClickListener {
         void onButtonClicked(int position);
@@ -43,12 +42,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.MyViewHolder holder, int position) {
         Item item = items.get(position);
-        holder.image.setImageResource(item.getImage());
-        holder.tvName.setText(item.getNameItem());
-        holder.tvHint.setText(item.getHintItem());
-        holder.tvCost.setText("$"+item.getCost());
-        holder.tvCount.setText(item.getCountBuy()+"-ая покупка");
-        holder.btnBuy.setOnClickListener(v -> {
+        holder.binding.MarketImage.setImageResource(item.getImage());
+        holder.binding.MarketName.setText(item.getNameItem());
+        holder.binding.MarketHint.setText(item.getHintItem());
+        holder.binding.MarketCost.setText("$"+item.getCost());
+        holder.binding.MarketCount.setText(item.getCountBuy()+"-ая покупка");
+        if (position==3){
+            holder.binding.MarketCount.setText(item.getCountBuy()+" из 2");
+        }else if(position==5) {
+            holder.binding.MarketCount.setText(item.getCountBuy()+" из 1");
+        }
+        holder.binding.MarketBuy.setOnClickListener(v -> {
             if (buttonClickListener != null) {
                 buttonClickListener.onButtonClicked(position);
             }
@@ -61,17 +65,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>{
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView image;
-        TextView tvName, tvHint,tvCost,tvCount;
-        Button btnBuy;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            image=itemView.findViewById(R.id.Market_Image);
-            tvName=itemView.findViewById(R.id.Market_Name);
-            tvHint=itemView.findViewById(R.id.Market_Hint);
-            tvCost=itemView.findViewById(R.id.Market_Cost);
-            tvCount=itemView.findViewById(R.id.Market_Count);
-            btnBuy=itemView.findViewById(R.id.Market_Buy);
+        private final MarketItemBinding binding;
+        public MyViewHolder(MarketItemBinding b) {
+            super(b.getRoot());
+            binding=b;
+
         }
     }
 }

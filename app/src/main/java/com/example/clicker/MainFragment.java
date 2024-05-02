@@ -17,7 +17,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-
 import com.example.clicker.databinding.FragmentMainBinding;
 
 import java.util.ArrayList;
@@ -52,6 +51,9 @@ public class MainFragment extends Fragment {
         binding.MainBtnMarket.setOnClickListener(v -> {
             controller.navigate(R.id.action_mainFragment_to_fragmentMarket);
         });
+        binding.MainBtnResearch.setOnClickListener(v -> {
+            controller.navigate(R.id.action_mainFragment_to_researchFragment);
+        });
         binding.MainBtnGather.setOnClickListener(v -> {
             model.incrBalanceGather();
         });
@@ -59,13 +61,18 @@ public class MainFragment extends Fragment {
         binding.MainPlantRecycler.setLayoutManager(new LinearLayoutManager(context));
         binding.MainPlantRecycler.setAdapter(adapter);
         binding.MainBtnMenu.setOnClickListener(v -> {
-            new Thread(() -> model.SaveToSave()).start();
-            mydialog.showDialogMenu(context,binding.getRoot(),"Что будем делать?","Выберите нужное\nнаправление");
+            mydialog.showDialogMenu(context,
+                    binding.getRoot(),
+                    "Что будем делать?",
+                    "Выберите нужное\nнаправление");
         });
         LiveBalance.observe(getViewLifecycleOwner(), balanceRes -> {
             binding.MainBalance.setText("$"+ balanceRes.getBalance());
             binding.MainBtnGather.setText("$"+ balanceRes.getGather());
             SlaveAll= balanceRes.getMarketPos(2);
+            if (LiveBalance.getValue().getMarketPos(5)==1){
+                binding.MainBtnResearch.setVisibility(View.VISIBLE);
+            }
         });
         LivePlants.observe(getViewLifecycleOwner(),plants -> {
             int use = 0;
@@ -75,8 +82,13 @@ public class MainFragment extends Fragment {
             use=SlaveAll-use;
             binding.MainSlaves.setText(use+"/"+SlaveAll);
         });
+
         return binding.getRoot();
     }
 
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        new Thread(() -> model.SaveToSave()).start();
+    }
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class ItemArrayListSetter {
     private Context mcontext;
     private ArrayList<Item> Item_Array ;
-    protected int[] itemsCountBuy=new int[6];
     protected int[] itemsCost;
     protected String[] itemsName;
     protected String[] itemsHint;
@@ -25,7 +24,7 @@ public class ItemArrayListSetter {
                     itemsHint[i],
                     itemsCost[i],
                     itemsImage[i],
-                    market[i]));
+                    market[i],itemsCost[i]));
         }
     }
 

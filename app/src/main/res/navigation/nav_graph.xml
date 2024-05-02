@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_helpFragment"
             app:destination="@id/helpFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_researchFragment"
+            app:destination="@id/researchFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMarket"
@@ -27,4 +30,9 @@
         android:name="com.example.clicker.HelpFragment"
         android:label="HelpFragment"
         tools:layout="@layout/fragment_help"/>
+    <fragment
+        android:id="@+id/researchFragment"
+        android:name="com.example.clicker.ResearchFragment"
+        android:label="ResearchFragment"
+        tools:layout="@layout/fragment_research"/>
 </navigation>

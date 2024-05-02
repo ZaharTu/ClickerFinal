@@ -7,6 +7,7 @@ import androidx.room.TypeConverters;
 
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Type;
 
@@ -14,51 +15,45 @@ import java.lang.reflect.Type;
 public class BalanceResEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @SerializedName("balance")
     private int balance;
+    @SerializedName("gather")
     private int gather;
+    @SerializedName("market")
     private int[] market;
+    @SerializedName("slaveOnEach")
     private int[] slaveOnEach;
 
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public int getBalance() {
         return balance;
     }
-
     public void setBalance(int balance) {
         this.balance = balance;
     }
-
     public int getGather() {
         return gather;
     }
-
     public int[] getSlaveOnEach() {
         return slaveOnEach;
     }
-
     public void setSlaveOnEach(int[] slaveOnEach) {
         this.slaveOnEach = slaveOnEach;
     }
-
     public void setGather(int gather) {
         this.gather = gather;
     }
-
     public int[] getMarket() {
         return market;
     }
-
     public void setMarket(int[] market) {
         this.market = market;
     }
-
     @TypeConverters({Converters.class})
     public static class Converters {
         @TypeConverter
@@ -66,7 +61,6 @@ public class BalanceResEntity {
             Type type = new TypeToken<int[]>() {}.getType();
             return new Gson().fromJson(value, type);
         }
-
         @TypeConverter
         public static String fromIntArray(int[] array) {
             return new Gson().toJson(array);

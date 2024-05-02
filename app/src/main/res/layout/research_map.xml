@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="1000dp"
+    android:background="@color/BackMain">
+
+    <ImageButton
+        android:id="@+id/Research_Btn_Start"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_design_research"
+        app:srcCompat="@drawable/colba"
+        android:scaleType="fitCenter"
+        />
+
+    <ImageButton
+        android:id="@+id/Research_Btn_Click_Up1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_design_research"
+        android:text="Button"
+        app:layout_constraintEnd_toStartOf="@+id/Research_Btn_Start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Research_Btn_Start"
+        app:srcCompat="@drawable/potato"
+        android:scaleType="fitCenter"
+        />
+
+    <ImageButton
+        android:id="@+id/Research_Btn_Click_Up2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_design_research"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Research_Btn_Start"
+        app:layout_constraintTop_toBottomOf="@+id/Research_Btn_Start"
+        app:srcCompat="@drawable/potato"
+        android:scaleType="fitCenter"
+        />
+
+    <ImageButton
+        android:id="@+id/Research_Btn_Click_Up3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_design_research"
+        android:scaleType="fitCenter"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/Research_Btn_End"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/potato" />
+    <ImageButton
+        android:id="@+id/Research_Btn_End"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_design_research"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/colba"
+        android:scaleType="fitCenter"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

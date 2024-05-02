@@ -48,6 +48,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="80dp"
                 android:layout_height="5dp"
+                android:progressTint="@color/Hint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/Plant_minus_button"
                 app:layout_constraintStart_toEndOf="@+id/ImageCard"

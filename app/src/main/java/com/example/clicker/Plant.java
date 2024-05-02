@@ -37,7 +37,7 @@ public class Plant {
     public void start(){
         if (!flagStart) {
             flagStart = true;
-            MaxProgress =100;
+            MaxProgress=100;
             progressBar.setMax(MaxProgress);
                 new Thread(() -> {
                     while (Slave > 0) {
@@ -46,14 +46,14 @@ public class Plant {
                             prog = progress;
                             progressBar.setProgress(progress);
                         } else {
+                            prog = 0;
                             progressBar.setProgress(0);
                             model.incrGatherPlant();
                             progressBar.setMax(MaxProgress);
-                            prog = 0;
                         }
                         try {
 
-                            Thread.sleep(100); // Пауза в 100 миллисекунд
+                            Thread.sleep(50);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
