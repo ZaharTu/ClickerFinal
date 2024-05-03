@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/researchFragment"
-        android:title="Research"
+        android:title="@string/research"
         android:icon="@drawable/colba" />
     <item
         android:id="@+id/mainFragment"
-        android:title="Main"
+        android:title="@string/main"
         android:icon="@drawable/potato"
         android:checked="true"/>
     <item
         android:id="@+id/fragmentMarket"
-        android:title="Market"
+        android:title="@string/market"
         android:icon="@drawable/store" />
     <item
         android:id="@+id/menuFragment"
-        android:title="Menu"
+        android:title="@string/menu"
         android:icon="@drawable/baseline_menu_24"/>
 </menu>

@@ -7,6 +7,10 @@
     <string name="HelpMenu" translatable="false">Подсказки по игре 🤓</string>
     <string name="Progress" translatable="false">Прогресс 💼</string>
     <string name="help_cancel" translatable="false">Нажмите *назад* чтобы попасть в меню</string>
+    <string name="research">Research</string>
+    <string name="main">Main</string>
+    <string name="market">Market</string>
+    <string name="menu">Menu</string>
     <string-array name="MarketName">
         <item>Лопата</item>
         <item>Лейка</item>

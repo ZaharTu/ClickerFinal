@@ -1,11 +1,11 @@
 package com.example.clicker;
 
 public class MarketItem{
-    private String NameItem;
-    private String HintItem;
+    private final String NameItem;
+    private final String HintItem;
     private int Cost;
-    private int baseCost;
-    private int image;
+    private final int baseCost;
+    private final int image;
     private int countBuy;
     public MarketItem(String nameItem, String HintItem, int cost, int image, int countBuy) {
         this.HintItem=HintItem;

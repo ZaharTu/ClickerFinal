@@ -46,11 +46,11 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MyViewHold
         holder.binding.MarketName.setText(marketItem.getNameItem());
         holder.binding.MarketHint.setText(marketItem.getHintItem());
         holder.binding.MarketCost.setText("$"+ marketItem.getCost());
-        if (position<=3){
-            holder.binding.MarketCount.setText(marketItem.getCountBuy()+"-ая покупка");
-        }else{
+        holder.binding.MarketCount.setText(marketItem.getCountBuy()+"-ая покупка");
+        holder.binding.MarketBuy.setText("Купить");
+        if (position>3) {
             holder.binding.MarketCount.setText("");
-            holder.binding.MarketName.setText(marketItem.getNameItem()+" Уровень "+marketItem.getCountBuy());
+            holder.binding.MarketName.setText(marketItem.getNameItem() + " Уровень " + marketItem.getCountBuy());
             holder.binding.MarketBuy.setText("Улучшить");
         }
         holder.binding.MarketBuy.setOnClickListener(v -> {

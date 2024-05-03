@@ -135,7 +135,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         if (marketArray != null && position >= 0 && position < marketArray.size() && resourses.balance>=cost) {
             switch (position){
                 case 1:
-                    if (resourses.getMarketPos(1)<100){
+                    if (resourses.getMarketPos(1)<50){
                         decrBalance(cost);
                         marketArray.get(position).IncrCount();
                         marketArray.get(position).IncrCost(1);
