@@ -11,8 +11,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Type;
 
-@Entity(tableName = "balance_table")
-public class BalanceResEntity {
+@Entity(tableName = "resourses_table")
+public class ResoursesEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @SerializedName("balance")
@@ -21,9 +21,10 @@ public class BalanceResEntity {
     private int gather;
     @SerializedName("market")
     private int[] market;
-    @SerializedName("slaveOnEach")
-    private int[] slaveOnEach;
-
+    @SerializedName("volume")
+    private float volume;
+    @SerializedName("usableSlave")
+    private int usableSlave;
     public int getId() {
         return id;
     }
@@ -39,12 +40,6 @@ public class BalanceResEntity {
     public int getGather() {
         return gather;
     }
-    public int[] getSlaveOnEach() {
-        return slaveOnEach;
-    }
-    public void setSlaveOnEach(int[] slaveOnEach) {
-        this.slaveOnEach = slaveOnEach;
-    }
     public void setGather(int gather) {
         this.gather = gather;
     }
@@ -53,6 +48,18 @@ public class BalanceResEntity {
     }
     public void setMarket(int[] market) {
         this.market = market;
+    }
+    public float getVolume() {
+        return volume;
+    }
+    public void setVolume(float volume) {
+        this.volume = volume;
+    }
+    public int getUsableSlave() {
+        return usableSlave;
+    }
+    public void setUsableSlave(int usableSlave) {
+        this.usableSlave = usableSlave;
     }
     @TypeConverters({Converters.class})
     public static class Converters {

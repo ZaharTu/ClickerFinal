@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="BackMain">#DAD871</color>
     <color name="text">#1B1116</color>
     <color name="BtnSecondBackground">#FFA420</color>
     <color name="ProgressBar">#FFF5A5</color>
+    <color name="BottomNavRipple">#FDEAA8</color>
     <color name="Hint">#0A4500</color>
     <color name="BtnMainBackground">#595959</color>
-    <color name="BtnResearchBackground">#7FB5B5</color>
 
 </resources>

@@ -4,16 +4,14 @@ import android.content.Context;
 import android.widget.ProgressBar;
 
 public class Plant {
-    private int position;
     private int prog;
     private int Slave=0;
     private ProgressBar progressBar;
     private int MaxProgress;
     private boolean flagStart;
     private ViewModel model;
-    public Plant(Context context,int position) {
+    public Plant(Context context) {
         model=ViewModel.newInstance(context);
-        this.position=position;
     }
     public int getSlave() {
         return Slave;

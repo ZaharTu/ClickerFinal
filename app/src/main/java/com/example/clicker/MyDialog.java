@@ -4,11 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.navigation.Navigation;
 
 public class MyDialog {
     protected static TextView Dialog_TV_Name,Dialog_TV_Hint;
@@ -17,18 +14,6 @@ public class MyDialog {
         Dialog dialog = SetUpDialog(context,title,message);
         Dialog_Btn_Cancel.setOnClickListener(v-> dialog.dismiss());
         Dialog_Btn_One.setOnClickListener(v-> dialog.dismiss());
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-    }
-    public static void showDialogMenu(Context context, View view, String title, String message) {
-        Dialog dialog = SetUpDialog(context,title,message);
-        Dialog_Btn_One.setVisibility(View.VISIBLE);
-        Dialog_Btn_Cancel.setOnClickListener(v-> dialog.dismiss());
-        Dialog_Btn_One.setOnClickListener(v->{
-            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_helpFragment);
-            dialog.dismiss();
-        });
-        Dialog_Btn_One.setText("Подсказки");
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }

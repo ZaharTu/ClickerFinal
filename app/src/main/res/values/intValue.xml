@@ -4,8 +4,9 @@
         <item>100</item>
         <item>500</item>
         <item>2000</item>
-        <item>5000</item>
         <item>15000</item>
-        <item>50000</item>
+        <item>10000</item>
+        <item>15000</item>
+        <item>25000</item>
     </integer-array>
 </resources>

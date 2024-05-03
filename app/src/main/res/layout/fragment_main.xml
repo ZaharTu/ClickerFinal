@@ -8,17 +8,51 @@
     android:background="@color/BackMain"
     >
 
-    <TextView
-        android:id="@+id/Main_Balance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/abc"
-        android:text="0$"
-        android:textColor="@color/text"
-        android:textSize="30sp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/Main_Balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abc"
+            android:text="0$"
+            android:textColor="@color/Hint"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/Main_Btn_Gather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_design"
+            android:fontFamily="@font/molot"
+            android:text="Собрать"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Main_Slaves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/molot"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/Main_Btn_Gather"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Main_Plant_Recycler"
@@ -27,82 +61,25 @@
         android:foreground="@drawable/okantovka_recyclerview_main"
         app:layout_constraintBottom_toTopOf="@+id/Main_Btn_Potato"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.48"
+        app:layout_constraintHeight_percent="0.60"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Main_Balance" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <ImageButton
         android:id="@+id/Main_Btn_Potato"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:background="@color/BackMain"
         android:scaleType="centerInside"
         android:soundEffectsEnabled="false"
         android:src="@drawable/potato"
-        app:layout_constraintBottom_toTopOf="@+id/Main_Btn_Market"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/Main_Btn_Market"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:adjustViewBounds="true"
-        android:background="@color/BtnMainBackground"
-        android:scaleType="centerInside"
-        android:src="@drawable/store"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Main_Btn_Research"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
+        app:layout_constraintHeight_percent="0.30"
         />
 
-    <ImageButton
-        android:id="@+id/Main_Btn_Research"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:adjustViewBounds="true"
-        android:background="@color/BtnMainBackground"
-        android:scaleType="centerInside"
-        android:src="@drawable/colba"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/Main_Btn_Market"
-        android:visibility="gone"
-        android:layout_marginStart="5dp"/>
 
-    <Button
-        android:id="@+id/Main_Btn_Menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_design"
-        android:fontFamily="@font/molot"
-        android:text="Меню"
-        app:layout_constraintBottom_toTopOf="@+id/Main_Plant_Recycler"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Main_Btn_Gather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_design"
-        android:fontFamily="@font/molot"
-        android:text="Собрать"
-        app:layout_constraintBottom_toTopOf="@+id/Main_Plant_Recycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Main_Slaves"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/molot"
-        android:text="TextView"
-        android:textColor="@color/text"
-        app:layout_constraintBottom_toTopOf="@+id/Main_Plant_Recycler"
-        app:layout_constraintEnd_toStartOf="@+id/Main_Btn_Gather"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

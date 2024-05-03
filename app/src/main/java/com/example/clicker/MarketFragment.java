@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 public class MarketFragment extends Fragment {
     private FragmentMarketBinding binding;
-    private ItemAdapter adapter;
+    private MarketAdapter adapter;
     private ViewModel model;
-    private LiveData<ArrayList<Item>> Live_Data_Items;
-    private LiveData<ViewModel.BalanceRes> Live_Data_Balance;
+    private LiveData<ArrayList<MarketItem>> Live_Data_Market;
+    private LiveData<ViewModel.Resourses> Live_Data_Balance;
     private Context context;
 
     @Nullable
@@ -30,17 +30,17 @@ public class MarketFragment extends Fragment {
         binding = FragmentMarketBinding.inflate(getLayoutInflater());
         context=getContext();
         model=ViewModel.newInstance(context);
-        Live_Data_Items=model.getLiveDataArray();
-        Live_Data_Balance=model.getLiveDataBalance();
-        adapter = new ItemAdapter(context,model.getLiveDataArray().getValue());
+        Live_Data_Market=model.getLiveDataArray();
+        Live_Data_Balance=model.getLiveDataResourses();
+        adapter = new MarketAdapter(context,model.getLiveDataArray().getValue());
         binding.MarketRecycler.setLayoutManager(new LinearLayoutManager(context));
         binding.MarketRecycler.setItemAnimator(null);
         binding.MarketRecycler.setAdapter(adapter);
         binding.MarketBalance.setText("$"+Live_Data_Balance.getValue().getBalance());
-        Live_Data_Balance.observe(getViewLifecycleOwner(), balanceRes -> {
-            binding.MarketBalance.setText("$"+ balanceRes.getBalance());
+        Live_Data_Balance.observe(getViewLifecycleOwner(), resourses -> {
+            binding.MarketBalance.setText("$"+ resourses.getBalance());
         });
-        Live_Data_Items.observe(getViewLifecycleOwner(),items -> {
+        Live_Data_Market.observe(getViewLifecycleOwner(),items -> {
             adapter.UpdateItems(model.getLiveDataArray().getValue());
         });
         adapter.setOnButtonClickListener(position -> {

@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.clicker.databinding.FragmentMainBinding;
@@ -24,35 +22,28 @@ import java.util.ArrayList;
 public class MainFragment extends Fragment {
     private FragmentMainBinding binding;
     private ViewModel model;
-    private LiveData<ViewModel.BalanceRes> LiveBalance;
+    private LiveData<ViewModel.Resourses> LiveBalance;
     private LiveData<ArrayList<Plant>> LivePlants;
     private PlantAdapter adapter;
     private MediaPlayer mediaPlayer;
     private Animation animPotatoBtn;
     private Context context;
     private int SlaveAll=0;
+    private float volume=0.5f;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding= FragmentMainBinding.inflate(getLayoutInflater());
         context=getContext();
-        MyDialog mydialog = new MyDialog();
         model=ViewModel.newInstance(context);
-        LiveBalance=model.getLiveDataBalance();
-        LivePlants=model.getLiveDataPlants();
-        NavController controller = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
+        LiveBalance=model.getLiveDataResourses();
         mediaPlayer=MediaPlayer.create(context,R.raw.digging);
+        mediaPlayer.setVolume(volume,volume);
         animPotatoBtn = AnimationUtils.loadAnimation(context, R.anim.main_potato_anim);
         binding.MainBtnPotato.setOnClickListener(v -> {
             binding.MainBtnPotato.setAnimation(animPotatoBtn);
             mediaPlayer.start();
             model.incrBalanceClick();
-        });
-        binding.MainBtnMarket.setOnClickListener(v -> {
-            controller.navigate(R.id.action_mainFragment_to_fragmentMarket);
-        });
-        binding.MainBtnResearch.setOnClickListener(v -> {
-            controller.navigate(R.id.action_mainFragment_to_researchFragment);
         });
         binding.MainBtnGather.setOnClickListener(v -> {
             model.incrBalanceGather();
@@ -60,29 +51,16 @@ public class MainFragment extends Fragment {
         adapter=new PlantAdapter(context);
         binding.MainPlantRecycler.setLayoutManager(new LinearLayoutManager(context));
         binding.MainPlantRecycler.setAdapter(adapter);
-        binding.MainBtnMenu.setOnClickListener(v -> {
-            mydialog.showDialogMenu(context,
-                    binding.getRoot(),
-                    "Что будем делать?",
-                    "Выберите нужное\nнаправление");
-        });
-        LiveBalance.observe(getViewLifecycleOwner(), balanceRes -> {
-            binding.MainBalance.setText("$"+ balanceRes.getBalance());
-            binding.MainBtnGather.setText("$"+ balanceRes.getGather());
-            SlaveAll= balanceRes.getMarketPos(2);
-            if (LiveBalance.getValue().getMarketPos(5)==1){
-                binding.MainBtnResearch.setVisibility(View.VISIBLE);
+        LiveBalance.observe(getViewLifecycleOwner(), resourses -> {
+            binding.MainBalance.setText("$"+ resourses.getBalance());
+            binding.MainBtnGather.setText("$"+ resourses.getGather());
+            SlaveAll= resourses.getMarketPos(2);
+            binding.MainSlaves.setText(resourses.getUsableSlave()+"/"+SlaveAll);
+            if (volume!=resourses.getVolume()){
+                volume=resourses.getVolume();
+                mediaPlayer.setVolume(volume,volume);
             }
         });
-        LivePlants.observe(getViewLifecycleOwner(),plants -> {
-            int use = 0;
-            for (int i = 0; i < plants.size(); i++) {
-                use += plants.get(i).getSlave();
-            }
-            use=SlaveAll-use;
-            binding.MainSlaves.setText(use+"/"+SlaveAll);
-        });
-
         return binding.getRoot();
     }
 

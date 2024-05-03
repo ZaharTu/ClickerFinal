@@ -7,5 +7,14 @@
     <style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+    <style name="bottom_Navigate" parent="Theme.MaterialComponents.Light">
+        <item name="backgroundColor">@color/BtnMainBackground</item>
+        <item name="colorPrimary">@color/BtnSecondBackground</item>
+        <item name="android:background">@color/ProgressBar</item>
+    </style>
+    <style name="seekBar" parent="Base.Widget.AppCompat.SeekBar.Discrete">
+        <item name="android:progressDrawable">@drawable/custom_seek_bar_progress</item>
     </style>
 </resources>

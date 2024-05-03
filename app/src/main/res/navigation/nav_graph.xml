@@ -14,11 +14,11 @@
             android:id="@+id/action_mainFragment_to_fragmentMarket"
             app:destination="@id/fragmentMarket" />
         <action
-            android:id="@+id/action_mainFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_researchFragment"
             app:destination="@id/researchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMarket"
@@ -35,4 +35,13 @@
         android:name="com.example.clicker.ResearchFragment"
         android:label="ResearchFragment"
         tools:layout="@layout/fragment_research"/>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.clicker.MenuFragment"
+        android:label="menuFragment"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
+    </fragment>
 </navigation>

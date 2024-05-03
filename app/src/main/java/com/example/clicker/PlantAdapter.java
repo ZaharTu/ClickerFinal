@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clicker.databinding.PlantBarBinding;
@@ -18,12 +17,10 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
     ViewModel viewModel;
     ArrayList<Plant> plants;
     Context mcontext;
-    LiveData<ArrayList<Plant>> liveData;
     public PlantAdapter(Context context){
         mcontext=context;
         viewModel= ViewModel.newInstance(context);
-        liveData=viewModel.getLiveDataPlants();
-        plants=liveData.getValue();
+        plants=viewModel.getPlants();
     }
 
     @NonNull
@@ -43,13 +40,13 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
         holder.binding.PlantProgress.setProgress(plants.get(position).getProgress());
         viewModel.startSlavesPos(position);
         holder.binding.PlantPlusButton.setOnClickListener(v -> {
-            if (viewModel.incrSlavesPos(position)) {
+            if (viewModel.incrSlavesPos()) {
                 viewModel.startSlavesPos(position);
                 holder.binding.PlantSlaves.setText(""+plants.get(position).getSlave());
             }
         });
         holder.binding.PlantMinusButton.setOnClickListener(v ->{
-            if (viewModel.decrSlavesPos(position)){
+            if (viewModel.decrSlavesPos()){
                 holder.binding.PlantSlaves.setText(""+plants.get(position).getSlave());
             }
         } );

@@ -12,21 +12,21 @@ import com.example.clicker.databinding.MarketItemBinding;
 
 import java.util.ArrayList;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>{
-    ArrayList<Item> items;
+public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MyViewHolder>{
+    ArrayList<MarketItem> marketItems;
     Context mcontext;
-    public ItemAdapter(Context context,ArrayList<Item> items){
+    public MarketAdapter(Context context, ArrayList<MarketItem> marketItems){
         mcontext=context;
-        this.items=items;
+        this.marketItems = marketItems;
     }
-    public void UpdateItems(ArrayList<Item> items){
-        this.items = items;
+    public void UpdateItems(ArrayList<MarketItem> marketItems){
+        this.marketItems = marketItems;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ItemAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MarketAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mcontext);
         View view =layoutInflater.inflate(R.layout.market_item,parent,false);
         return new MyViewHolder(MarketItemBinding.bind(view));
@@ -40,17 +40,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>{
         this.buttonClickListener = listener;
     }
     @Override
-    public void onBindViewHolder(@NonNull ItemAdapter.MyViewHolder holder, int position) {
-        Item item = items.get(position);
-        holder.binding.MarketImage.setImageResource(item.getImage());
-        holder.binding.MarketName.setText(item.getNameItem());
-        holder.binding.MarketHint.setText(item.getHintItem());
-        holder.binding.MarketCost.setText("$"+item.getCost());
-        holder.binding.MarketCount.setText(item.getCountBuy()+"-ая покупка");
-        if (position==3){
-            holder.binding.MarketCount.setText(item.getCountBuy()+" из 2");
-        }else if(position==5) {
-            holder.binding.MarketCount.setText(item.getCountBuy()+" из 1");
+    public void onBindViewHolder(@NonNull MarketAdapter.MyViewHolder holder, int position) {
+        MarketItem marketItem = marketItems.get(position);
+        holder.binding.MarketImage.setImageResource(marketItem.getImage());
+        holder.binding.MarketName.setText(marketItem.getNameItem());
+        holder.binding.MarketHint.setText(marketItem.getHintItem());
+        holder.binding.MarketCost.setText("$"+ marketItem.getCost());
+        if (position<=3){
+            holder.binding.MarketCount.setText(marketItem.getCountBuy()+"-ая покупка");
+        }else{
+            holder.binding.MarketCount.setText("");
+            holder.binding.MarketName.setText(marketItem.getNameItem()+" Уровень "+marketItem.getCountBuy());
+            holder.binding.MarketBuy.setText("Улучшить");
         }
         holder.binding.MarketBuy.setOnClickListener(v -> {
             if (buttonClickListener != null) {
@@ -61,7 +62,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>{
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return marketItems.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -69,7 +70,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder>{
         public MyViewHolder(MarketItemBinding b) {
             super(b.getRoot());
             binding=b;
-
         }
     }
 }

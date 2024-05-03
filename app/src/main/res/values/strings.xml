@@ -6,22 +6,24 @@
     <string name="plus" translatable="false">+</string>
     <string name="HelpMenu" translatable="false">Подсказки по игре 🤓</string>
     <string name="Progress" translatable="false">Прогресс 💼</string>
-    <string name="help_cancel">Нажмите *назад* чтобы попасть на главную</string>
+    <string name="help_cancel" translatable="false">Нажмите *назад* чтобы попасть в меню</string>
     <string-array name="MarketName">
         <item>Лопата</item>
         <item>Лейка</item>
         <item>Раб</item>
-        <item>Плантация</item>
         <item>Трактор</item>
-        <item>Деревня</item>
+        <item>Плантация</item>
+        <item>Амбар</item>
+        <item>Рынок</item>
     </string-array>
     <string-array name="MarketHint">
         <item>+1$ за клик</item>
         <item>+1%\nк удвоению</item>
         <item>+1 Раб\nОтправь работать</item>
-        <item>Добавляет\nплантацию</item>
         <item>+1 множителя\nкартошки\nкогда вырастет</item>
-        <item>Затычка</item>
+        <item>Затычка1</item>
+        <item>Затычка2</item>
+        <item>Затычка3</item>
     </string-array>
     <string-array name="HelpName">
         <item>Старт игры 👶</item>
@@ -53,7 +55,6 @@
             Да, один из них умеет управлять трактором</item>
         <item>Пока что в разработке, планируется что будет открывать меню исследований</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

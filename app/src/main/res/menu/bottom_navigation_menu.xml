@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/researchFragment"
+        android:title="Research"
+        android:icon="@drawable/colba" />
+    <item
+        android:id="@+id/mainFragment"
+        android:title="Main"
+        android:icon="@drawable/potato"
+        android:checked="true"/>
+    <item
+        android:id="@+id/fragmentMarket"
+        android:title="Market"
+        android:icon="@drawable/store" />
+    <item
+        android:id="@+id/menuFragment"
+        android:title="Menu"
+        android:icon="@drawable/baseline_menu_24"/>
+</menu>

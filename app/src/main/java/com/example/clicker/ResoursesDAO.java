@@ -5,12 +5,12 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 @Dao
-public interface BalanceResDAO {
-    @Query("SELECT * FROM balance_table ORDER BY id DESC LIMIT 1")
-    BalanceResEntity getLastBalanceRes();
+public interface ResoursesDAO {
+    @Query("SELECT * FROM resourses_table ORDER BY id DESC LIMIT 1")
+    ResoursesEntity getLastResourses();
 
     @Insert
-    void insert(BalanceResEntity balanceResEntity);
+    void insert(ResoursesEntity resoursesEntity);
 
     // Другие методы для работы с BalanceResEntity
 }
