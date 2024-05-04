@@ -17,22 +17,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.clicker.databinding.FragmentMainBinding;
 
-import java.util.ArrayList;
-
 public class MainFragment extends Fragment {
     private FragmentMainBinding binding;
     private ViewModel model;
     private LiveData<ViewModel.Resourses> LiveBalance;
-    private LiveData<ArrayList<Plant>> LivePlants;
     private PlantAdapter adapter;
     private MediaPlayer mediaPlayer;
     private Animation animPotatoBtn;
     private Context context;
     private int SlaveAll=0;
     private float volume=0.5f;
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         binding= FragmentMainBinding.inflate(getLayoutInflater());
         context=getContext();
         model=ViewModel.newInstance(context);
@@ -40,6 +38,9 @@ public class MainFragment extends Fragment {
         mediaPlayer=MediaPlayer.create(context,R.raw.digging);
         mediaPlayer.setVolume(volume,volume);
         animPotatoBtn = AnimationUtils.loadAnimation(context, R.anim.main_potato_anim);
+        adapter= new PlantAdapter(context);
+        binding.MainPlantRecycler.setLayoutManager(new LinearLayoutManager(context));
+        binding.MainPlantRecycler.setAdapter(adapter);
         binding.MainBtnPotato.setOnClickListener(v -> {
             binding.MainBtnPotato.setAnimation(animPotatoBtn);
             mediaPlayer.start();
@@ -48,9 +49,12 @@ public class MainFragment extends Fragment {
         binding.MainBtnGather.setOnClickListener(v -> {
             model.incrBalanceGather();
         });
-        adapter=new PlantAdapter(context);
-        binding.MainPlantRecycler.setLayoutManager(new LinearLayoutManager(context));
-        binding.MainPlantRecycler.setAdapter(adapter);
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         LiveBalance.observe(getViewLifecycleOwner(), resourses -> {
             binding.MainBalance.setText("$"+ resourses.getBalance());
             binding.MainBtnGather.setText("$"+ resourses.getGather());
@@ -62,11 +66,5 @@ public class MainFragment extends Fragment {
             }
         });
         return binding.getRoot();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        new Thread(() -> model.SaveToSave()).start();
     }
 }

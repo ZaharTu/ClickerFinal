@@ -15,12 +15,13 @@ import java.util.ArrayList;
 
 public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder> {
     ViewModel viewModel;
-    ArrayList<Plant> plants;
+    ArrayList<Plant> plants= new ArrayList<>();
     Context mcontext;
     public PlantAdapter(Context context){
         mcontext=context;
         viewModel= ViewModel.newInstance(context);
-        plants=viewModel.getPlants();
+        plants.add(new Plant(context));
+        plants.get(0).setSlave(viewModel.getLiveDataResourses().getValue().getUsableSlave());
     }
 
     @NonNull
@@ -33,20 +34,22 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PlantAdapter.MyViewHolder holder, int position) {
-        viewModel.setProgressBar(position,holder.binding.PlantProgress);
+        plants.get(position).setProgressBar(holder.binding.PlantProgress);
         holder.binding.PlantName.setText(R.string.Plant);
         holder.binding.PlantImage.setImageResource(R.drawable.plant);
         holder.binding.PlantProgress.setMax(100);
         holder.binding.PlantProgress.setProgress(plants.get(position).getProgress());
-        viewModel.startSlavesPos(position);
+        plants.get(position).start();
         holder.binding.PlantPlusButton.setOnClickListener(v -> {
             if (viewModel.incrSlavesPos()) {
-                viewModel.startSlavesPos(position);
+                plants.get(position).IncrSlave();
+                plants.get(position).start();
                 holder.binding.PlantSlaves.setText(""+plants.get(position).getSlave());
             }
         });
         holder.binding.PlantMinusButton.setOnClickListener(v ->{
             if (viewModel.decrSlavesPos()){
+                plants.get(position).DincrSlave();
                 holder.binding.PlantSlaves.setText(""+plants.get(position).getSlave());
             }
         } );

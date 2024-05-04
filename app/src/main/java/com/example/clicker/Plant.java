@@ -20,7 +20,7 @@ public class Plant {
         this.progressBar = progressBar;
     }
     public void IncrSlave() {
-            Slave++;
+        Slave++;
     }
     public void DincrSlave() {
         if (Slave>0){

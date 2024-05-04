@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoadingActivity"
+    android:background="@color/BackMain">
+
+    <ImageView
+        android:id="@+id/LoadingPotato"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoadingProgress"
+        app:srcCompat="@drawable/potato" />
+
+    <TextView
+        android:id="@+id/LoadingTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Загрузка"
+        android:fontFamily="@font/molot"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/LoadingProgressTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/molot"
+        android:text="0%"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/LoadingProgress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"
+        />
+
+    <ProgressBar
+        android:id="@+id/LoadingProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/LoadingTxt"
+        app:layout_constraintStart_toStartOf="@+id/LoadingTxt"
+        app:layout_constraintTop_toBottomOf="@+id/LoadingTxt"
+        android:layout_marginTop="100dp"
+        android:max="100"
+        app:layout_constraintWidth_percent="0.5"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

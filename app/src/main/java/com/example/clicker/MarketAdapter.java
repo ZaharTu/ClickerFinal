@@ -19,9 +19,10 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MyViewHold
         mcontext=context;
         this.marketItems = marketItems;
     }
-    public void UpdateItems(ArrayList<MarketItem> marketItems){
-        this.marketItems = marketItems;
-        notifyDataSetChanged();
+    public void BuyItem(int position){
+        marketItems.get(position).IncrCount();
+        marketItems.get(position).IncrCost(position);
+        notifyItemChanged(position);
     }
 
     @NonNull

@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.room.common)
     implementation(libs.room.runtime)
     implementation(libs.firebase.crashlytics.buildtools)
+    implementation(libs.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

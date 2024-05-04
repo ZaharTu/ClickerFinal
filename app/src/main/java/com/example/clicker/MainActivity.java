@@ -11,21 +11,28 @@ import com.example.clicker.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 ActivityMainBinding binding;
+private NavHostFragment navHostFragment;
+private NavController navController;
 private ViewModel model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        model=ViewModel.newInstance(getApplicationContext());
-        new Thread(() -> model.LoadOfSave()).start();
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
-        NavController navController = navHostFragment.getNavController();
+        model=ViewModel.newInstance(this);
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        navController = navHostFragment.getNavController();
         binding.bottomNavigationView.setSelectedItemId(R.id.mainFragment);
         binding.bottomNavigationView.setOnItemSelectedListener(menuItem -> {
             NavigationUI.onNavDestinationSelected(menuItem,navController);
             return true;
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        new Thread(() -> model.SaveToSave()).start();
     }
 
 }

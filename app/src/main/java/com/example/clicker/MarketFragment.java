@@ -20,32 +20,38 @@ public class MarketFragment extends Fragment {
     private FragmentMarketBinding binding;
     private MarketAdapter adapter;
     private ViewModel model;
-    private LiveData<ArrayList<MarketItem>> Live_Data_Market;
     private LiveData<ViewModel.Resourses> Live_Data_Balance;
-    private Context context;
+    private ArrayList<MarketItem> marketItems;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = FragmentMarketBinding.inflate(getLayoutInflater());
+        Context context = getContext();
+        model=ViewModel.newInstance(context);
+        Live_Data_Balance=model.getLiveDataResourses();
+        marketItems=new MarketArraySetter(context,Live_Data_Balance.getValue().getMarket()).getMarketItem_Array();
+        for (int i = 0; i < marketItems.size(); i++) {
+            marketItems.get(i).IncrCost(i);
+        }
+        adapter = new MarketAdapter(context,marketItems);
+        binding.MarketRecycler.setLayoutManager(new LinearLayoutManager(context));
+        binding.MarketRecycler.setItemAnimator(null);
+        binding.MarketRecycler.setAdapter(adapter);
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentMarketBinding.inflate(getLayoutInflater());
-        context=getContext();
-        model=ViewModel.newInstance(context);
-        Live_Data_Market=model.getLiveDataArray();
-        Live_Data_Balance=model.getLiveDataResourses();
-        adapter = new MarketAdapter(context,model.getLiveDataArray().getValue());
-        binding.MarketRecycler.setLayoutManager(new LinearLayoutManager(context));
-        binding.MarketRecycler.setItemAnimator(null);
-        binding.MarketRecycler.setAdapter(adapter);
         binding.MarketBalance.setText("$"+Live_Data_Balance.getValue().getBalance());
         Live_Data_Balance.observe(getViewLifecycleOwner(), resourses -> {
             binding.MarketBalance.setText("$"+ resourses.getBalance());
         });
-        Live_Data_Market.observe(getViewLifecycleOwner(),items -> {
-            adapter.UpdateItems(model.getLiveDataArray().getValue());
-        });
         adapter.setOnButtonClickListener(position -> {
-            model.incrCountBuy(position);
+            if (model.incrCountBuy(position)){
+                adapter.BuyItem(position);
+            }
         });
         return binding.getRoot();
     }
+
 }
