@@ -4,8 +4,14 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {ResoursesEntity.class}, version = 1)
-@TypeConverters(ResoursesEntity.Converters.class)
+@Database(entities = {ResoursEntity.class}, version = 1)
+@TypeConverters(ResoursEntity.Converters.class)
 public abstract class AppDataBase extends RoomDatabase{
-    public abstract ResoursesDAO ResoursesDAO();
+    public abstract ResoursDAO ResoursDAO();
+    public void deleteAllExceptLastAndInsertLast(ResoursEntity lastResours) {
+        ResoursDAO dao = ResoursDAO();
+        dao.deleteAllExceptLast();
+        dao.delete(lastResours);
+        dao.insert(lastResours);
+    }
 }

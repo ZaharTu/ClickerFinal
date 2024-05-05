@@ -10,25 +10,28 @@ public class Save {
         appDatabase= Room.databaseBuilder(context.getApplicationContext(),
                 AppDataBase.class,"app-database").build();
     }
-    public void saveBalanceRes(ViewModel.Resourses resourses) {
-        ResoursesEntity resoursesEntity = new ResoursesEntity();
-        resoursesEntity.setBalance(resourses.getBalance());
-        resoursesEntity.setGather(resourses.getGather());
-        resoursesEntity.setMarket(resourses.getMarket());
-        resoursesEntity.setVolume(resourses.getVolume());
-        resoursesEntity.setUsableSlave(resourses.getUsableSlave());
-        appDatabase.ResoursesDAO().insert(resoursesEntity);
+    public void saveBalanceRes(ViewModel.Resours resours) {
+        ResoursEntity resoursEntity = new ResoursEntity();
+        resoursEntity.setBalance(resours.getBalance());
+        resoursEntity.setGather(resours.getGather());
+        resoursEntity.setMarket(resours.getMarket());
+        resoursEntity.setVolume(resours.getVolume());
+        resoursEntity.setUsableSlave(resours.getUsableSlave());
+        appDatabase.ResoursDAO().insert(resoursEntity);
     }
-    public ViewModel.Resourses getBalanceRes() {
-        ResoursesEntity resoursesEntity = appDatabase.ResoursesDAO().getLastResourses();
-        if (resoursesEntity ==null) return null;
-        ViewModel.Resourses resourses = new ViewModel.Resourses();
-        resourses.setBalance(resoursesEntity.getBalance());
-        resourses.setGather(resoursesEntity.getGather());
-        resourses.setMarket(resoursesEntity.getMarket());
-        resourses.setUsableSlave(resoursesEntity.getUsableSlave());
-        resourses.setVolume(resoursesEntity.getVolume());
-        return resourses;
+    public ViewModel.Resours getBalanceRes() {
+        ResoursEntity resoursEntity = appDatabase.ResoursDAO().getLastResours();
+        if (resoursEntity!=null){
+            appDatabase.deleteAllExceptLastAndInsertLast(resoursEntity);
+            ViewModel.Resours resours = new ViewModel.Resours();
+            resours.setBalance(resoursEntity.getBalance());
+            resours.setGather(resoursEntity.getGather());
+            resours.setMarket(resoursEntity.getMarket());
+            resours.setUsableSlave(resoursEntity.getUsableSlave());
+            resours.setVolume(resoursEntity.getVolume());
+            return resours;
+        }
+        return null;
     }
 
 }

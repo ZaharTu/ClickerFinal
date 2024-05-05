@@ -9,10 +9,10 @@ import java.util.Random;
 
 
 public class ViewModel extends androidx.lifecycle.ViewModel {
-    private final MutableLiveData<Resourses> liveDataResourses = new MutableLiveData<>();
+    private final MutableLiveData<Resours> liveDataResourses = new MutableLiveData<>();
     private static Context mcontext;
     private static ViewModel ModelInstanse = null;
-    private Resourses resourses = new Resourses();
+    private Resours resours = new Resours();
     private final Random random=new Random();
     private Save save;
     public static ViewModel newInstance(Context context) {
@@ -27,18 +27,18 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         setBalanceRes(save.getBalanceRes());
     }
     public void SaveToSave(){
-        save.saveBalanceRes(resourses);
+        save.saveBalanceRes(resours);
     }
-    public void setBalanceRes(Resourses resourses){
-        if (resourses !=null){
-            this.resourses = resourses;
+    public void setBalanceRes(Resours resours){
+        if (resours !=null){
+            this.resours = resours;
         }
     }
-    public MutableLiveData<Resourses> getLiveDataResourses() {
-        liveDataResourses.setValue(resourses);
+    public MutableLiveData<Resours> getLiveDataResourses() {
+        liveDataResourses.setValue(resours);
         return liveDataResourses;
     }
-    public static class Resourses {
+    public static class Resours {
         private int balance=0;
         private int gather=0;
         private int[] market=new int[7];
@@ -79,30 +79,30 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         }
     }
     public boolean incrSlavesPos(){
-        if (resourses.getUsableSlave()<resourses.getMarketPos(2)){
-            resourses.usableSlave++;
-            liveDataResourses.setValue(resourses);
+        if (resours.getUsableSlave()< resours.getMarketPos(2)){
+            resours.usableSlave++;
+            liveDataResourses.setValue(resours);
             return true;
         }
         return false;
     }
     public boolean decrSlavesPos(){
-        if (resourses.getUsableSlave()>0){
-            resourses.usableSlave--;
-            liveDataResourses.setValue(resourses);
+        if (resours.getUsableSlave()>0){
+            resours.usableSlave--;
+            liveDataResourses.setValue(resours);
             return true;
         }
         return false;
     }
     public void setVolumeRes(float volume) {
-        resourses.volume= volume;
-        liveDataResourses.setValue(resourses);
+        resours.volume= volume;
+        liveDataResourses.setValue(resours);
     }
     public boolean incrCountBuy(int position) {
         int[] cost = mcontext.getResources().getIntArray(R.array.MarketCost);
-        if (resourses.balance>=cost[position]) {
+        if (resours.balance>=cost[position]) {
             if (position==1){
-                if (resourses.getMarketPos(1)<50){
+                if (resours.getMarketPos(1)<50){
                     decrBalance(cost[position]);
                     incrMarket(position);
                     return true;
@@ -118,35 +118,35 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
     public void incrBalanceClick(){
         double chance;
         double randomd=random.nextDouble();
-        if (resourses.getMarketPos(1)>50){
+        if (resours.getMarketPos(1)>50){
             chance=0.5;
         }
         else{
-            chance=resourses.getMarketPos(1)*0.01;
+            chance= resours.getMarketPos(1)*0.01;
         }
         if (randomd<=chance){
-            resourses.balance+=(1+ resourses.getMarketPos(0))*2;
+            resours.balance+=(1+ resours.getMarketPos(0))*2;
         }else{
-            resourses.balance+=1000+ resourses.getMarketPos(0);
+            resours.balance+=1000+ resours.getMarketPos(0);
         }
-        liveDataResourses.setValue(resourses);
+        liveDataResourses.setValue(resours);
     }
     public void incrGatherPlant(){
-        resourses.gather+=10*(resourses.getMarketPos(4)+1);
-        liveDataResourses.postValue(resourses);
+        resours.gather+=10*(resours.getMarketPos(4)+1);
+        liveDataResourses.postValue(resours);
     }
     public void incrBalanceGather(){
-        resourses.balance+= resourses.gather;
-        resourses.gather=0;
-        liveDataResourses.setValue(resourses);
+        resours.balance+= resours.gather;
+        resours.gather=0;
+        liveDataResourses.setValue(resours);
     }
     public void decrBalance(int decr){
-        if (resourses.balance>=decr){
-            resourses.balance-=decr;
+        if (resours.balance>=decr){
+            resours.balance-=decr;
         }
     }
     public void incrMarket(int position){
-        resourses.market[position]++;
-        liveDataResourses.setValue(resourses);
+        resours.market[position]++;
+        liveDataResourses.setValue(resours);
     }
 }

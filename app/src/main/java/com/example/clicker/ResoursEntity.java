@@ -11,8 +11,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Type;
 
-@Entity(tableName = "resourses_table")
-public class ResoursesEntity {
+@Entity(tableName = "resours_table")
+public class ResoursEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @SerializedName("balance")

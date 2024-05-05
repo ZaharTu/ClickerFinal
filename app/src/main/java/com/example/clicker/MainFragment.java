@@ -20,14 +20,13 @@ import com.example.clicker.databinding.FragmentMainBinding;
 public class MainFragment extends Fragment {
     private FragmentMainBinding binding;
     private ViewModel model;
-    private LiveData<ViewModel.Resourses> LiveBalance;
+    private LiveData<ViewModel.Resours> LiveBalance;
     private PlantAdapter adapter;
     private MediaPlayer mediaPlayer;
     private Animation animPotatoBtn;
     private Context context;
     private int SlaveAll=0;
     private float volume=0.5f;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +54,13 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LiveBalance.observe(getViewLifecycleOwner(), resourses -> {
-            binding.MainBalance.setText("$"+ resourses.getBalance());
-            binding.MainBtnGather.setText("$"+ resourses.getGather());
-            SlaveAll= resourses.getMarketPos(2);
-            binding.MainSlaves.setText(resourses.getUsableSlave()+"/"+SlaveAll);
-            if (volume!=resourses.getVolume()){
-                volume=resourses.getVolume();
+        LiveBalance.observe(getViewLifecycleOwner(), resours -> {
+            binding.MainBalance.setText("$"+ resours.getBalance());
+            binding.MainBtnGather.setText("$"+ resours.getGather());
+            SlaveAll= resours.getMarketPos(2);
+            binding.MainSlaves.setText(resours.getUsableSlave()+"/"+SlaveAll);
+            if (volume!= resours.getVolume()){
+                volume= resours.getVolume();
                 mediaPlayer.setVolume(volume,volume);
             }
         });
