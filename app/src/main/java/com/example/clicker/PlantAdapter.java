@@ -14,14 +14,14 @@ import com.example.clicker.databinding.PlantBarBinding;
 import java.util.ArrayList;
 
 public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder> {
-    ViewModel viewModel;
+    AllResRepository repository;
     ArrayList<Plant> plants= new ArrayList<>();
     Context mcontext;
     public PlantAdapter(Context context){
         mcontext=context;
-        viewModel= ViewModel.newInstance(context);
         plants.add(new Plant(context));
-        plants.get(0).setSlave(viewModel.getLiveDataResourses().getValue().getUsableSlave());
+        repository=AllResRepository.getInstance(context);
+        plants.get(0).setSlave(repository.getUsableSlave());
     }
 
     @NonNull
@@ -41,14 +41,14 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
         holder.binding.PlantProgress.setProgress(plants.get(position).getProgress());
         plants.get(position).start();
         holder.binding.PlantPlusButton.setOnClickListener(v -> {
-            if (viewModel.incrSlavesPos()) {
+            if (repository.incrSlavesPos()) {
                 plants.get(position).IncrSlave();
                 plants.get(position).start();
                 holder.binding.PlantSlaves.setText(""+plants.get(position).getSlave());
             }
         });
         holder.binding.PlantMinusButton.setOnClickListener(v ->{
-            if (viewModel.decrSlavesPos()){
+            if (repository.decrSlavesPos()){
                 plants.get(position).DincrSlave();
                 holder.binding.PlantSlaves.setText(""+plants.get(position).getSlave());
             }

@@ -6,32 +6,32 @@ import androidx.room.Room;
 
 public class Save {
     private static AppDataBase appDatabase;
-    public Save(Context context) {
+    private AllResRepository repository;
+
+    public Save(Context context,AllResRepository repository) {
         appDatabase= Room.databaseBuilder(context.getApplicationContext(),
                 AppDataBase.class,"app-database").build();
+        this.repository=repository;
     }
-    public void saveBalanceRes(ViewModel.Resours resours) {
-        ResoursEntity resoursEntity = new ResoursEntity();
-        resoursEntity.setBalance(resours.getBalance());
-        resoursEntity.setGather(resours.getGather());
-        resoursEntity.setMarket(resours.getMarket());
-        resoursEntity.setVolume(resours.getVolume());
-        resoursEntity.setUsableSlave(resours.getUsableSlave());
-        appDatabase.ResoursDAO().insert(resoursEntity);
+    public void saveBalanceRes() {
+        AllResEntity allResEntity = new AllResEntity();
+        allResEntity.setBalance(repository.getBalance());
+        allResEntity.setGather(repository.getGather());
+        allResEntity.setMarket(repository.getMarket());
+        allResEntity.setVolume(repository.getVolume());
+        allResEntity.setUsableSlave(repository.getUsableSlave());
+        appDatabase.AllResDAO().insert(allResEntity);
     }
-    public ViewModel.Resours getBalanceRes() {
-        ResoursEntity resoursEntity = appDatabase.ResoursDAO().getLastResours();
-        if (resoursEntity!=null){
-            appDatabase.deleteAllExceptLastAndInsertLast(resoursEntity);
-            ViewModel.Resours resours = new ViewModel.Resours();
-            resours.setBalance(resoursEntity.getBalance());
-            resours.setGather(resoursEntity.getGather());
-            resours.setMarket(resoursEntity.getMarket());
-            resours.setUsableSlave(resoursEntity.getUsableSlave());
-            resours.setVolume(resoursEntity.getVolume());
-            return resours;
+    public void getBalanceRes() {
+        AllResEntity allResEntity = appDatabase.AllResDAO().getLastResoursd();
+        if (allResEntity!=null){
+            repository.setBalance(allResEntity.getBalance());
+            repository.setGather(allResEntity.getGather());
+            repository.setMarket(allResEntity.getMarket());
+            repository.setUsableSlave(allResEntity.getUsableSlave());
+            repository.setVolume(allResEntity.getVolume());
+            appDatabase.AllResDAO().deleteOldData();
         }
-        return null;
     }
 
 }

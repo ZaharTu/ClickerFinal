@@ -20,15 +20,17 @@ public class MarketFragment extends Fragment {
     private FragmentMarketBinding binding;
     private MarketAdapter adapter;
     private ViewModel model;
-    private LiveData<ViewModel.Resours> Live_Data_Balance;
+    private LiveData<Integer> LiveBalance;
+    private AllResRepository repository;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentMarketBinding.inflate(getLayoutInflater());
         Context context = getContext();
-        model=ViewModel.newInstance(context);
-        Live_Data_Balance=model.getLiveDataResourses();
-        ArrayList<MarketItem> marketItems=new MarketArraySetter(context,Live_Data_Balance.getValue().getMarket()).getMarketItem_Array();
+        model=new ViewModel(context);
+        LiveBalance= model.getBalanceLiveData();
+        repository = AllResRepository.getInstance(context);
+        ArrayList<MarketItem> marketItems=new MarketArraySetter(context, repository.getMarket()).getMarketItem_Array();
         for (int i = 0; i < marketItems.size(); i++) {
             marketItems.get(i).IncrCost(i);
         }
@@ -37,7 +39,7 @@ public class MarketFragment extends Fragment {
         binding.MarketRecycler.setItemAnimator(null);
         binding.MarketRecycler.setAdapter(adapter);
         adapter.setOnButtonClickListener(position -> {
-            if (model.incrCountBuy(position)){
+            if (repository.incrCountBuy(position)){
                 adapter.BuyItem(position);
             }
         });
@@ -47,8 +49,8 @@ public class MarketFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Live_Data_Balance.observe(getViewLifecycleOwner(), resours -> {
-            binding.MarketBalance.setText("$"+ resours.getBalance());
+        LiveBalance.observe(getViewLifecycleOwner(), balance -> {
+            binding.MarketBalance.setText("$"+balance);
         });
         return binding.getRoot();
     }

@@ -9,9 +9,9 @@ public class Plant {
     private ProgressBar progressBar;
     private int MaxProgress;
     private boolean flagStart;
-    private ViewModel model;
+    private AllResRepository repository;
     public Plant(Context context) {
-        model=ViewModel.newInstance(context);
+        repository=AllResRepository.getInstance(context);
     }
     public int getSlave() {
         return Slave;
@@ -46,7 +46,7 @@ public class Plant {
                         } else {
                             prog = 0;
                             progressBar.setProgress(0);
-                            model.incrGatherPlant();
+                            repository.incrGatherPlant();
                             progressBar.setMax(MaxProgress);
                         }
                         try {

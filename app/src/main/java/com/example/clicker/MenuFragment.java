@@ -16,22 +16,22 @@ import com.example.clicker.databinding.FragmentMenuBinding;
 
 public class MenuFragment extends Fragment {
     private FragmentMenuBinding binding;
-    private ViewModel viewModel;
+    private AllResRepository repository;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding=FragmentMenuBinding.inflate(getLayoutInflater());
         NavController controller = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
-        viewModel=ViewModel.newInstance(getContext());
+        repository=AllResRepository.getInstance(getContext());
         binding.btnHelp.setOnClickListener(v -> {
             controller.navigate(R.id.action_menuFragment_to_helpFragment);
         });
-        binding.seekBar.setProgress((int)(viewModel.getLiveDataResourses().getValue().getVolume()*100));
-        binding.txtVolume.setText((int) (viewModel.getLiveDataResourses().getValue().getVolume()*100)+"%");
+        binding.seekBar.setProgress((int)(repository.getVolume()*100));
+        binding.txtVolume.setText((int) (repository.getVolume()*100)+"%");
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                viewModel.setVolumeRes(((float) progress)/100);
+                repository.setVolume(((float) progress)/100);
                 binding.txtVolume.setText(progress+"%");
             }
             @Override

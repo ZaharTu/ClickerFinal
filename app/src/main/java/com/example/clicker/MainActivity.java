@@ -1,5 +1,6 @@
 package com.example.clicker;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,13 +14,14 @@ public class MainActivity extends AppCompatActivity {
 ActivityMainBinding binding;
 private NavHostFragment navHostFragment;
 private NavController navController;
-private ViewModel model;
+private AllResRepository repository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        model=ViewModel.newInstance(this);
+        repository=AllResRepository.getInstance(this);
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         navController = navHostFragment.getNavController();
         binding.bottomNavigationView.setSelectedItemId(R.id.mainFragment);
@@ -27,12 +29,13 @@ private ViewModel model;
             NavigationUI.onNavDestinationSelected(menuItem,navController);
             return true;
         });
+        startService(new Intent(this,SaveService.class));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        new Thread(() -> model.SaveToSave()).start();
+        new Thread(()->{repository.SaveToSave();}).start();
     }
 
 }
