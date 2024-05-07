@@ -3,6 +3,8 @@
     <string name="UPSpeed" translatable="false">Ускорить</string>
     <string name="Potato" translatable="false">Жёлтая картошка</string>
     <string name="Plant" translatable="false">Плантация</string>
+    <string name="Barn" translatable="false">Амбар</string>
+    <string name="Market" translatable="false">Рынок</string>
     <string name="plus" translatable="false">+</string>
     <string name="HelpMenu" translatable="false">Подсказки по игре 🤓</string>
     <string name="Progress" translatable="false">Прогресс 💼</string>

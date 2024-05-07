@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.clicker.databinding.FragmentMainBinding;
 
@@ -26,7 +25,6 @@ public class MainFragment extends Fragment {
     private LiveData<Float> LiveVolume;
     private LiveData<AllRes.Slave> LiveSlave;
     private AllResRepository repository;
-    private PlantAdapter adapter;
     private MediaPlayer mediaPlayer;
     private Animation animPotatoBtn;
     private Context context;
@@ -46,10 +44,7 @@ public class MainFragment extends Fragment {
         mediaPlayer=MediaPlayer.create(context,R.raw.digging);
         mediaPlayer.setVolume(volume,volume);
         animPotatoBtn = AnimationUtils.loadAnimation(context, R.anim.main_potato_anim);
-        adapter= new PlantAdapter(context);
-        binding.MainPlantRecycler.setLayoutManager(new LinearLayoutManager(context));
-        binding.MainPlantRecycler.setAdapter(adapter);
-        binding.MainSlaves.setText(repository.getSlave().usableSlave+"/"+repository.getSlave().AllSlave);
+        binding.MainSlaves.setText(repository.getSlave().UsableSlaveGet()+"/"+repository.getSlave().AllSlave);
         binding.MainBtnGather.setText("$"+ repository.getGather());
         binding.MainBtnPotato.setOnClickListener(v -> {
             binding.MainBtnPotato.setAnimation(animPotatoBtn);
@@ -76,7 +71,7 @@ public class MainFragment extends Fragment {
             binding.MainBtnGather.setText("$"+ gather);
         });
         LiveSlave.observe(observer,slave -> {
-            binding.MainSlaves.setText(slave.usableSlave+"/"+slave.AllSlave);
+            binding.MainSlaves.setText(slave.UsableSlaveGet()+"/"+slave.AllSlave);
         });
         return binding.getRoot();
     }

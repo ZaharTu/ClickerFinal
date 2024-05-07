@@ -20,6 +20,7 @@ public class Save {
         allResEntity.setMarket(repository.getMarket());
         allResEntity.setVolume(repository.getVolume());
         allResEntity.setUsableSlave(repository.getUsableSlave());
+        allResEntity.setPotato(repository.getPotato());
         appDatabase.AllResDAO().insert(allResEntity);
     }
     public void getBalanceRes() {
@@ -30,6 +31,7 @@ public class Save {
             repository.setMarket(allResEntity.getMarket());
             repository.setUsableSlave(allResEntity.getUsableSlave());
             repository.setVolume(allResEntity.getVolume());
+            repository.setPotato(allResEntity.getPotato());
             appDatabase.AllResDAO().deleteOldData();
         }
     }

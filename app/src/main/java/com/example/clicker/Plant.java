@@ -3,18 +3,15 @@ package com.example.clicker;
 import android.content.Context;
 import android.widget.ProgressBar;
 
-public class Plant {
+public class Plant{
     private int prog;
     private int Slave=0;
     private ProgressBar progressBar;
-    private int MaxProgress;
+    private int MaxProgress=100;
     private boolean flagStart;
-    private AllResRepository repository;
+    private final AllResRepository repository;
     public Plant(Context context) {
         repository=AllResRepository.getInstance(context);
-    }
-    public int getSlave() {
-        return Slave;
     }
     public void setProgressBar(ProgressBar progressBar) {
         this.progressBar = progressBar;
@@ -22,20 +19,29 @@ public class Plant {
     public void IncrSlave() {
         Slave++;
     }
+    private boolean IncrMaxProgress(){
+        if (MaxProgress!=100+repository.getMarket()[4]*100){
+            MaxProgress=100+repository.getMarket()[4]*100;
+            return true;
+        }
+        return false;
+    }
     public void DincrSlave() {
         if (Slave>0){
             Slave--;
         }
     }
-
+    public int getSlave() {
+        return Slave;
+    }
     public void setSlave(int slave) {
         Slave = slave;
+        IncrMaxProgress();
+        if (slave>0){start();}
     }
-
     public void start(){
         if (!flagStart) {
             flagStart = true;
-            MaxProgress=100;
             progressBar.setMax(MaxProgress);
                 new Thread(() -> {
                     while (Slave > 0) {
@@ -44,10 +50,13 @@ public class Plant {
                             prog = progress;
                             progressBar.setProgress(progress);
                         } else {
+                            if(IncrMaxProgress()){
+                                progressBar.setMax(MaxProgress);
+                            }
                             prog = 0;
                             progressBar.setProgress(0);
                             repository.incrGatherPlant();
-                            progressBar.setMax(MaxProgress);
+                            repository.incrPotato();
                         }
                         try {
 
@@ -59,9 +68,5 @@ public class Plant {
                     flagStart = false;
                 }).start();
         }
-    }
-
-    public int getProgress() {
-        return prog;
     }
 }

@@ -24,7 +24,9 @@ public class AllResEntity {
     @SerializedName("volume")
     private float volume;
     @SerializedName("usableSlave")
-    private int usableSlave;
+    private int[] usableSlave;
+    @SerializedName("potato")
+    private int potato;
     public int getId() {
         return id;
     }
@@ -55,11 +57,17 @@ public class AllResEntity {
     public void setVolume(float volume) {
         this.volume = volume;
     }
-    public int getUsableSlave() {
+    public int[] getUsableSlave() {
         return usableSlave;
     }
-    public void setUsableSlave(int usableSlave) {
+    public void setUsableSlave(int[] usableSlave) {
         this.usableSlave = usableSlave;
+    }
+    public int getPotato() {
+        return potato;
+    }
+    public void setPotato(int potato) {
+        this.potato = potato;
     }
     @TypeConverters({Converters.class})
     public static class Converters {
