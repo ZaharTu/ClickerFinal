@@ -74,35 +74,38 @@
         android:name="com.example.clicker.PlantFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         app:layout_constraintBottom_toTopOf="@+id/Fragment_barn"
-        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintHeight_percent="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        tools:layout="@layout/fragment_plant" />
+        tools:layout="@layout/fragment_main_plant"
+        android:layout_margin="5dp"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/Fragment_barn"
         android:name="com.example.clicker.BarnFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.19"
         app:layout_constraintBottom_toTopOf="@+id/Main_Btn_Potato"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        tools:layout="@layout/fragment_barn" />
+        tools:layout="@layout/fragment_main_barn"
+        android:layout_marginHorizontal="5dp"/>
 
-    <!--<androidx.fragment.app.FragmentContainerView
-        android:id="@+id/Fragment_Market"
-        android:name="com.example.clicker.PlantFragment"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.clicker.MarketplaceFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="1dp"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintBottom_toTopOf="@+id/Main_Btn_Potato"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Fragment_barn"
-        tools:layout="@layout/fragment_barn" />-->
+        tools:layout="@layout/fragment_main_marketplace"
+        android:layout_margin="5dp"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

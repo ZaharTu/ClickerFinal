@@ -8,16 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MyDialog {
-    protected static TextView Dialog_TV_Name,Dialog_TV_Hint;
-    protected static Button Dialog_Btn_One,Dialog_Btn_Two,Dialog_Btn_Cancel;
-    public static void showDialogHelp(Context context, String title, String message) {
+    protected  TextView Dialog_TV_Name,Dialog_TV_Hint;
+    protected  Button Dialog_Btn_One,Dialog_Btn_Two,Dialog_Btn_Cancel;
+    public void showDialogHelp(Context context, String title, String message) {
         Dialog dialog = SetUpDialog(context,title,message);
         Dialog_Btn_Cancel.setOnClickListener(v-> dialog.dismiss());
         Dialog_Btn_One.setOnClickListener(v-> dialog.dismiss());
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
-    private static Dialog SetUpDialog(Context context , String title, String message){
+    private Dialog SetUpDialog(Context context , String title, String message){
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.custom_alert_dialog);
         Dialog_TV_Name = dialog.findViewById(R.id.Dialog_Name);

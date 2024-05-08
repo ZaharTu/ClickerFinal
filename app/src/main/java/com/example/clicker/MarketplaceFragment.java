@@ -13,50 +13,49 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.clicker.databinding.FragmentMainPlantBinding;
+import com.example.clicker.databinding.FragmentMainMarketplaceBinding;
 
-
-public class PlantFragment extends Fragment {
-    private FragmentMainPlantBinding binding;
-    private Plant plant;
+public class MarketplaceFragment extends Fragment {
+    private FragmentMainMarketplaceBinding binding;
+    private Marketplace marketplace;
     private Context context;
     private AllResRepository repository;
     private ViewModel viewModel;
     private MutableLiveData<int[]> LiveMarket;
     private LiveData<Float> LiveVolume;
-    private String plantName;
+    private String marketPlaceName;
     private float volume=0.5f;
     private MediaPlayer mediaPlayerAdd;
     private MediaPlayer mediaPlayerDecr;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= FragmentMainPlantBinding.inflate(getLayoutInflater());
+        binding= FragmentMainMarketplaceBinding.inflate(getLayoutInflater());
         context=getContext();
+        marketplace=new Marketplace(context);
+        marketPlaceName = getResources().getString(R.string.Market);
         viewModel=new ViewModel(context);
         LiveMarket=viewModel.getMarketLiveData();
         LiveVolume=viewModel.getVolumeLiveData();
-        plant=new Plant(context);
-        plantName = getResources().getString(R.string.Plant);
         mediaPlayerAdd=MediaPlayer.create(context,R.raw.slave_incr);
         mediaPlayerAdd.setVolume(volume,volume);
         mediaPlayerDecr=MediaPlayer.create(context,R.raw.slave_decr);
         mediaPlayerDecr.setVolume(volume,volume);
-        plant.setProgressBar(binding.PlantProgress);
+        marketplace.setProgressBar(binding.MarketPlaceProgress);
         repository=AllResRepository.getInstance(context);
-        plant.setSlave(repository.getUsableSlave()[0]);
-        binding.PlantSlaves.setText(""+plant.getSlave());
-        binding.PlantPlusButton.setOnClickListener(v -> {
-            if (repository.incrSlavesPos(0)){
-                plant.IncrSlave();
-                binding.PlantSlaves.setText(""+plant.getSlave());
+        marketplace.setSlave(repository.getUsableSlave()[2]);
+        binding.MarketPlaceSlaves.setText(""+marketplace.getSlave());
+        binding.MarketPlacePlusButton.setOnClickListener(v -> {
+            if (repository.incrSlavesPos(2)){
+                marketplace.IncrSlave();
+                binding.MarketPlaceSlaves.setText(""+marketplace.getSlave());
                 mediaPlayerAdd.start();
             }
         });
-        binding.PlantMinusButton.setOnClickListener(v -> {
-            if (repository.decrSlavesPos(0)){
-                plant.DincrSlave();
-                binding.PlantSlaves.setText(""+plant.getSlave());
+        binding.MarketPlaceMinusButton.setOnClickListener(v -> {
+            if (repository.decrSlavesPos(2)){
+                marketplace.DincrSlave();
+                binding.MarketPlaceSlaves.setText(""+marketplace.getSlave());
                 mediaPlayerDecr.start();
             }
         });
@@ -67,7 +66,7 @@ public class PlantFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         LiveMarket.observe(getViewLifecycleOwner(),market -> {
-            binding.PlantName.setText(plantName+" УР "+market[4]);
+            binding.MarketPlaceName.setText(marketPlaceName+" УР "+market[6]);
         });
         LiveVolume.observe(getViewLifecycleOwner(),volume->{
             mediaPlayerAdd.setVolume(volume,volume);

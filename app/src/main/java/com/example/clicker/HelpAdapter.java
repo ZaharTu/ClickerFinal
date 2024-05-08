@@ -16,10 +16,11 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder>{
     private final Context mcontext;
     private String[] Help_Name;
     private String[] Help_Hint;
+    private final MyDialog myDialog= new MyDialog();
     int[] Help_Image = {R.drawable.potatobg,R.drawable.what,
             R.drawable.money, R.drawable.shovel, R.drawable.leyka,
-            R.drawable.slave, R.drawable.plant,
-            R.drawable.traktor,R.drawable.village};
+            R.drawable.slave, R.drawable.traktor,R.drawable.plant,
+            R.drawable.barn, R.drawable.market};
 
     public HelpAdapter(Context mcontext) {
         this.mcontext = mcontext;
@@ -40,7 +41,7 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder>{
         holder.Help_Name_Adapter.setText(Help_Name[position]);
         holder.Help_Image_Adapter.setImageResource(Help_Image[position]);
         holder.itemView.setOnClickListener(v -> {
-            MyDialog.showDialogHelp(mcontext,Help_Name[position], Help_Hint[position]);
+            myDialog.showDialogHelp(mcontext,Help_Name[position], Help_Hint[position]);
         });
     }
 

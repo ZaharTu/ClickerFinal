@@ -26,10 +26,10 @@ public class MainFragment extends Fragment {
     private LiveData<AllRes.Slave> LiveSlave;
     private AllResRepository repository;
     private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayerLeyka;
+    private float volume=0.5f;
     private Animation animPotatoBtn;
     private Context context;
-    private float volume=0.5f;
-    private LifecycleOwner observer;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,15 +41,20 @@ public class MainFragment extends Fragment {
         LiveGather=model.getGatherLiveData();
         LiveVolume= model.getVolumeLiveData();
         LiveSlave=model.getSlaveLiveData();
-        mediaPlayer=MediaPlayer.create(context,R.raw.digging);
+        mediaPlayer=MediaPlayer.create(context,R.raw.potato);
+        mediaPlayerLeyka=MediaPlayer.create(context,R.raw.potato_with_leyka);
+        mediaPlayerLeyka.setVolume(volume,volume);
         mediaPlayer.setVolume(volume,volume);
         animPotatoBtn = AnimationUtils.loadAnimation(context, R.anim.main_potato_anim);
         binding.MainSlaves.setText(repository.getSlave().UsableSlaveGet()+"/"+repository.getSlave().AllSlave);
         binding.MainBtnGather.setText("$"+ repository.getGather());
         binding.MainBtnPotato.setOnClickListener(v -> {
-            binding.MainBtnPotato.setAnimation(animPotatoBtn);
-            mediaPlayer.start();
-            repository.incrBalanceClick();
+            binding.MainBtnPotato.startAnimation(animPotatoBtn);
+            if (repository.incrBalanceClick()){
+                mediaPlayerLeyka.start();
+            }else{
+                mediaPlayer.start();
+            }
         });
         binding.MainBtnGather.setOnClickListener(v -> {
             repository.incrBalanceGather();
@@ -60,17 +65,18 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        observer=getViewLifecycleOwner();
-        LiveBalance.observe(observer,balance -> {
+        LifecycleOwner observer = getViewLifecycleOwner();
+        LiveBalance.observe(observer, balance -> {
             binding.MainBalance.setText("$"+ balance);
         });
-        LiveVolume.observe(observer,volume->{
+        LiveVolume.observe(observer, volume->{
             mediaPlayer.setVolume(volume,volume);
+            mediaPlayerLeyka.setVolume(volume,volume);
         });
-        LiveGather.observe(observer,gather->{
+        LiveGather.observe(observer, gather->{
             binding.MainBtnGather.setText("$"+ gather);
         });
-        LiveSlave.observe(observer,slave -> {
+        LiveSlave.observe(observer, slave -> {
             binding.MainSlaves.setText(slave.UsableSlaveGet()+"/"+slave.AllSlave);
         });
         return binding.getRoot();

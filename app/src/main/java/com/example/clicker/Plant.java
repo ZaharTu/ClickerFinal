@@ -18,6 +18,7 @@ public class Plant{
     }
     public void IncrSlave() {
         Slave++;
+        start();
     }
     private boolean IncrMaxProgress(){
         if (MaxProgress!=100+repository.getMarket()[4]*100){

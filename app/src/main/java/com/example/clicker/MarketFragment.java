@@ -1,6 +1,7 @@
 package com.example.clicker;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.clicker.databinding.FragmentMarketBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -21,7 +23,10 @@ public class MarketFragment extends Fragment {
     private MarketAdapter adapter;
     private ViewModel model;
     private LiveData<Integer> LiveBalance;
+    private LiveData<Float> LiveVolume;
     private AllResRepository repository;
+    private MediaPlayer mediaPlayerBuy;
+    private MediaPlayer mediaPlayerError;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +34,11 @@ public class MarketFragment extends Fragment {
         Context context = getContext();
         model=new ViewModel(context);
         LiveBalance= model.getBalanceLiveData();
+        LiveVolume=model.getVolumeLiveData();
         repository = AllResRepository.getInstance(context);
+        mediaPlayerBuy=MediaPlayer.create(context,R.raw.buy);
+        mediaPlayerBuy.setVolume(0.5f,0.5f);
+        mediaPlayerError=MediaPlayer.create(context,R.raw.error);
         ArrayList<MarketItem> marketItems=new MarketArraySetter(context, repository.getMarket()).getMarketItem_Array();
         for (int i = 0; i < marketItems.size(); i++) {
             marketItems.get(i).IncrCost(i);
@@ -41,6 +50,13 @@ public class MarketFragment extends Fragment {
         adapter.setOnButtonClickListener(position -> {
             if (repository.incrCountBuy(position)){
                 adapter.BuyItem(position);
+                mediaPlayerBuy.start();
+            }else{
+                mediaPlayerError.start();
+                Snackbar.make(binding.getRoot(),R.string.Dont_Buy,Snackbar.LENGTH_SHORT)
+                        .setBackgroundTint(getResources().getColor
+                                (R.color.ProgressBar, getContext().getTheme()))
+                        .show();
             }
         });
 
@@ -51,6 +67,10 @@ public class MarketFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         LiveBalance.observe(getViewLifecycleOwner(), balance -> {
             binding.MarketBalance.setText("$"+balance);
+        });
+        LiveVolume.observe(getViewLifecycleOwner(), volume->{
+            mediaPlayerBuy.setVolume(volume,volume);
+            mediaPlayerError.setVolume(volume,volume);
         });
         return binding.getRoot();
     }

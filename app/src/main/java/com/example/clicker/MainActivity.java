@@ -35,7 +35,7 @@ private AllResRepository repository;
     @Override
     protected void onPause() {
         super.onPause();
-        new Thread(()->{repository.SaveToSave();}).start();
+        new Thread(()-> repository.SaveToSave()).start();
     }
 
 }
