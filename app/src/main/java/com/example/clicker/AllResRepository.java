@@ -157,22 +157,22 @@ public class AllResRepository {
     }
     public boolean incrCountBuy(int position) {
         int[] cost = context.getResources().getIntArray(R.array.MarketCost);
-        if (res.balance>=cost[position]) {
+        if (res.balance>=(cost[position]*(int)(res.market[position]/10+1))) {
             if (position==1){
                 if (res.market[1]<50){
-                    decrBalance(cost[position]);
+                    decrBalance(cost[position]*(int)(res.market[position]/10+1));
                     incrMarket(position);
                     return true;
                 }
             }else if (position==2){
                 slave.AllSlave++;
-                decrBalance(cost[position]);
+                decrBalance(cost[position]*(int)(res.market[position]/10+1));
                 incrMarket(position);
                 slaveLiveData.setValue(slave);
                 return true;
             }
             else {
-                decrBalance(cost[position]);
+                decrBalance(cost[position]*(int)(res.market[position]/10+1));
                 incrMarket(position);
                 return true;
             }

@@ -21,6 +21,7 @@ public class Save {
         allResEntity.setVolume(repository.getVolume());
         allResEntity.setUsableSlave(repository.getUsableSlave());
         allResEntity.setPotato(repository.getPotato());
+        appDatabase.AllResDAO().deleteOldData();
         appDatabase.AllResDAO().insert(allResEntity);
     }
     public void getBalanceRes() {
@@ -32,7 +33,6 @@ public class Save {
             repository.setUsableSlave(allResEntity.getUsableSlave());
             repository.setVolume(allResEntity.getVolume());
             repository.setPotato(allResEntity.getPotato());
-            appDatabase.AllResDAO().deleteOldData();
         }
     }
 

@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder>{
     private final Context mcontext;
-    private String[] Help_Name;
-    private String[] Help_Hint;
+    private final String[] Help_Name;
+    private final String[] Help_Hint;
     private final MyDialog myDialog= new MyDialog();
     int[] Help_Image = {R.drawable.potatobg,R.drawable.what,
             R.drawable.money, R.drawable.shovel, R.drawable.leyka,
