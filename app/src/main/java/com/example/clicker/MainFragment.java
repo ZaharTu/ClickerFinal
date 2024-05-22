@@ -56,7 +56,8 @@ public class MainFragment extends Fragment {
         mediaPlayer=MediaPlayer.create(context,R.raw.potato);
         mediaPlayer.setVolume(volume,volume);
         animPotatoBtn = AnimationUtils.loadAnimation(context, R.anim.main_potato_anim);
-        binding.MainSlaves.setText(repository.getSlave().UsableSlaveGet()+"/"+repository.getSlave().AllSlave);
+        binding.MainSlaves.setText(repository.getSlave().UsableSlaveGet()
+                +"/"+repository.getSlave().AllSlave+"\uD83D\uDC68\u200D\uD83C\uDF3E");
         binding.MainBtnGather.setText("$"+ repository.getGather());
         binding.MainBtnPotato.setOnClickListener(v -> {
             binding.MainBtnPotato.startAnimation(animPotatoBtn);
@@ -82,7 +83,8 @@ public class MainFragment extends Fragment {
             binding.MainBtnGather.setText("$"+ gather);
         });
         LiveSlave.observe(observer, slave -> {
-            binding.MainSlaves.setText(slave.UsableSlaveGet()+"/"+slave.AllSlave+"\uD83D\uDC68\u200D\uD83C\uDF3E");//👨‍🌾
+            binding.MainSlaves.setText(slave.UsableSlaveGet()
+                    +"/"+slave.AllSlave+"\uD83D\uDC68\u200D\uD83C\uDF3E");//👨‍🌾
         });
         LiveResearch.observe(observer,research->{
             if (research[0]==1){

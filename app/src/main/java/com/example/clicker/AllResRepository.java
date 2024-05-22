@@ -110,7 +110,7 @@ public class AllResRepository {
             res.balance+=(1+ res.market[0])*2;
             balanceLiveData.postValue(res.balance);
         }else{
-            res.balance+=100000+res.market[0];
+            res.balance+=10000+res.market[0];
             balanceLiveData.postValue(res.balance);
         }
     }

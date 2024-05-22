@@ -3,7 +3,9 @@
         <item name="android:textColor">@color/text</item>
         <item name="android:background">@color/ProgressBar</item>
     </style>
-    <style name="Theme.Clickers" parent="Base.Theme.Clicker" />
+    <style name="Theme.Clickers" parent="Base.Theme.Clicker">
+        <item name="android:windowBackground">@drawable/start_screen</item>
+    </style>
     <style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
