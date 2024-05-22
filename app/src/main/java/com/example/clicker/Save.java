@@ -16,6 +16,7 @@ public class Save {
     public void saveBalanceRes() {
         AllResEntity allResEntity = new AllResEntity();
         allResEntity.setBalance(repository.getBalance());
+        allResEntity.setResearch(repository.getResearch());
         allResEntity.setGather(repository.getGather());
         allResEntity.setMarket(repository.getMarket());
         allResEntity.setVolume(repository.getVolume());
@@ -28,11 +29,12 @@ public class Save {
         AllResEntity allResEntity = appDatabase.AllResDAO().getLastResoursd();
         if (allResEntity!=null){
             repository.setBalance(allResEntity.getBalance());
-            repository.setGather(allResEntity.getGather());
+            repository.setResearch(allResEntity.getResearch());
             repository.setMarket(allResEntity.getMarket());
             repository.setUsableSlave(allResEntity.getUsableSlave());
             repository.setVolume(allResEntity.getVolume());
             repository.setPotato(allResEntity.getPotato());
+            repository.setGather(allResEntity.getGather());
         }
     }
 

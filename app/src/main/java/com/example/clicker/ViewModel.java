@@ -13,14 +13,16 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
     private final MutableLiveData<AllRes.Slave> slaveLiveData;
     private final MutableLiveData<Float> volumeLiveData;
     private final MutableLiveData<int[]> marketLiveData;
+    private final MutableLiveData<int[]> researchLiveData;
     public ViewModel(Context context) {
         AllResRepository repository = AllResRepository.getInstance(context);
-        potatoLiveData=repository.getPotatoLiveData();
+        potatoLiveData= repository.getPotatoLiveData();
         balanceLiveData= repository.getBalanceLiveData();
         gatherLiveData= repository.getGatherLiveData();
         slaveLiveData= repository.getSlaveLiveData();
         volumeLiveData= repository.getVolumeLiveData();
         marketLiveData= repository.getMarketLiveData();
+        researchLiveData= repository.getResearchLiveData();
     }
 
     public MutableLiveData<Integer> getPotatoLiveData() {
@@ -40,5 +42,8 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
     }
     public MutableLiveData<int[]> getMarketLiveData() {
         return marketLiveData;
+    }
+    public MutableLiveData<int[]> getResearchLiveData() {
+        return researchLiveData;
     }
 }

@@ -6,19 +6,191 @@
     android:layout_height="match_parent"
     android:background="@color/BackMain">
 
+    <TextView
+        android:id="@+id/Research_Balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/molot"
+        android:text="0$"
+        android:textSize="30sp"
+        android:textColor="@color/Hint"
+        app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/Research_Potato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/molot"
+        android:text="0🥔"
+        android:textSize="30sp"
+        android:textColor="@color/Hint"
+        app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintHeight_percent="0.9">
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constr_in"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <include layout="@layout/research_map" />
+            android:layout_height="1200dp"
+            android:background="@color/BackMain">
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Start"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/colba" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Shovel1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintHeight_percent="0.15"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_Barn"
+                app:layout_constraintEnd_toStartOf="@+id/Research_Btn_Start"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_Start"
+                app:srcCompat="@drawable/shovel" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Shovel2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_Barn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/Research_Btn_Start"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_Start"
+                app:srcCompat="@drawable/shovel" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Barn"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_MarketPlace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_Start"
+                app:srcCompat="@drawable/barn" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Click_Up2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_MarketPlace"
+                app:layout_constraintEnd_toStartOf="@+id/Research_Btn_Barn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_Barn"
+                app:srcCompat="@drawable/barn" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Leyka"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_MarketPlace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/Research_Btn_Barn"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_Barn"
+                app:srcCompat="@drawable/leyka" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_MarketPlace"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_End"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_Start"
+                app:srcCompat="@drawable/market" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Slave"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_Village"
+                app:layout_constraintEnd_toStartOf="@+id/Research_Btn_MarketPlace"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_MarketPlace"
+                app:srcCompat="@drawable/slave" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Traktor"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_Village"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/Research_Btn_MarketPlace"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_MarketPlace"
+                app:srcCompat="@drawable/traktor" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_Village"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/Research_Btn_End"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Research_Btn_MarketPlace"
+                app:srcCompat="@drawable/village" />
+
+            <ImageButton
+                android:id="@+id/Research_Btn_End"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_design_research"
+                android:scaleType="fitCenter"
+                android:text="Button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/colba" />
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

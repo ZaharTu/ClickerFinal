@@ -9,6 +9,7 @@ public class AllRes {
     protected int[] market=new int[7];
     protected float volume=0.5f;
     protected int potato=0;
+    protected int[] research=new int[10];
     public static class Slave{
         int[] usableSlave=new int[3];
         int AllSlave=0;

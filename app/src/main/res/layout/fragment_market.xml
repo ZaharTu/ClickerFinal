@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MarketFragment"
     android:orientation="vertical"
-    android:background="@color/BackMain">
+    android:background="@color/BackMain"
+    android:id="@+id/constraintLayout">
 
     <TextView
         android:id="@+id/Market_Balance"

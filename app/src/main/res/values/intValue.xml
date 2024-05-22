@@ -9,4 +9,16 @@
         <item>15000</item>
         <item>25000</item>
     </integer-array>
+    <integer-array name="ResearchCost">
+        <item>5555</item>
+        <item>100000</item>
+        <item>22222</item>
+        <item>100</item>
+        <item>3500</item>
+        <item>7500</item>
+        <item>12500</item>
+        <item>20000</item>
+        <item>25000</item>
+        <item>50000</item>
+    </integer-array>
 </resources>

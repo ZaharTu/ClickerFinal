@@ -8,6 +8,7 @@ public class Barn{
     private ProgressBar progressBar;
     private int MaxProgress=0;
     private final AllResRepository repository;
+    private boolean researched_barn_2;
     public Barn(Context context) {
         repository=AllResRepository.getInstance(context);
     }
@@ -29,10 +30,9 @@ public class Barn{
         }
     }
     public void IncrMaxProgress(){
-        if (MaxProgress!=repository.getMarket()[5]*1000+Slave*150){
-            MaxProgress=repository.getMarket()[5]*1000+Slave*150;
-            progressBar.setMax(MaxProgress);
-        }
+        if (researched_barn_2) MaxProgress=repository.getMarket()[5]*1000+Slave*500;
+        else MaxProgress=repository.getMarket()[5]*1000+Slave*250;
+        progressBar.setMax(MaxProgress);
     }
     public int getSlave() {
         return Slave;
@@ -41,10 +41,13 @@ public class Barn{
         Slave = slave;
         IncrMaxProgress();
     }
-    public void IncrProgress(){
-        progressBar.setProgress(repository.getPotato());
+    public void IncrProgress(int potato){
+        progressBar.setProgress(potato);
     }
     public int getMaxProgress(){
         return MaxProgress;
+    }
+    public void setResearched_barn_2(boolean researched_barn_2) {
+        this.researched_barn_2 = researched_barn_2;
     }
 }

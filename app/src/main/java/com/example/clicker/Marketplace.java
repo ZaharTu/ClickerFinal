@@ -45,7 +45,7 @@ public class Marketplace {
                     } else {
                         prog = 0;
                         progressBar.setProgress(0);
-                        repository.incrBalancePotato();
+                        repository.incrBalanceMarketPlace();
                     }
                     try {
                         Thread.sleep(50);

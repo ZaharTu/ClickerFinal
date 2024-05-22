@@ -27,6 +27,8 @@ public class AllResEntity {
     private int[] usableSlave;
     @SerializedName("potato")
     private int potato;
+    @SerializedName("research")
+    private int[] research;
     public int getId() {
         return id;
     }
@@ -69,6 +71,13 @@ public class AllResEntity {
     public void setPotato(int potato) {
         this.potato = potato;
     }
+    public int[] getResearch() {
+        return research;
+    }
+    public void setResearch(int[] research) {
+        this.research = research;
+    }
+
     @TypeConverters({Converters.class})
     public static class Converters {
         @TypeConverter

@@ -22,6 +22,7 @@ public class BarnFragment extends Fragment {
     private AllResRepository repository;
     private ViewModel viewModel;
     private MutableLiveData<int[]> LiveMarket;
+    private MutableLiveData<int[]> LiveResearch;
     private LiveData<Integer> LivePotato;
     private LiveData<Float> LiveVolume;
     private String barnName;
@@ -38,6 +39,7 @@ public class BarnFragment extends Fragment {
         LiveMarket=viewModel.getMarketLiveData();
         LiveVolume=viewModel.getVolumeLiveData();
         LivePotato=viewModel.getPotatoLiveData();
+        LiveResearch=viewModel.getResearchLiveData();
         mediaPlayerAdd=MediaPlayer.create(context,R.raw.slave_incr);
         mediaPlayerAdd.setVolume(volume,volume);
         mediaPlayerDecr=MediaPlayer.create(context,R.raw.slave_decr);
@@ -64,14 +66,21 @@ public class BarnFragment extends Fragment {
             }
         });
         binding.BarnPotato.setText(repository.getPotato()+"/"+ barn.getMaxProgress());
+        barn.IncrMaxProgress();
+        binding.BarnProgress.setProgress(repository.getPotato());
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LiveResearch.observe(getViewLifecycleOwner(),research->{
+            if (research[3]==1){
+                barn.setResearched_barn_2(true);
+            }
+        });
         LivePotato.observe(getViewLifecycleOwner(),potato->{
-            barn.IncrProgress();
-            binding.BarnPotato.setText(repository.getPotato()+"/"+ barn.getMaxProgress());
+            barn.IncrProgress(potato);
+            binding.BarnPotato.setText(potato+"/"+ barn.getMaxProgress());
         });
         LiveMarket.observe(getViewLifecycleOwner(),market->{
             barn.IncrMaxProgress();
@@ -83,6 +92,9 @@ public class BarnFragment extends Fragment {
             mediaPlayerAdd.setVolume(volume,volume);
             mediaPlayerDecr.setVolume(volume,volume);
         });
-        return binding.getRoot();
+        if(LiveResearch.getValue()!=null){
+            if (LiveResearch.getValue()[2]==1) return binding.getRoot();
+        }
+        return inflater.inflate(R.layout.fragment_main_barn_b_and_w,container,false);
     }
 }

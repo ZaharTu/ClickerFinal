@@ -47,10 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/molot"
-            android:text="TextView"
+            android:text="0/0👨‍🌾"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/Main_Btn_Gather"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -99,7 +100,7 @@
         android:name="com.example.clicker.MarketplaceFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintHeight_percent="0.19"
         app:layout_constraintBottom_toTopOf="@+id/Main_Btn_Potato"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

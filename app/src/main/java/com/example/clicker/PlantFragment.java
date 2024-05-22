@@ -23,6 +23,7 @@ public class PlantFragment extends Fragment {
     private AllResRepository repository;
     private ViewModel viewModel;
     private MutableLiveData<int[]> LiveMarket;
+    private MutableLiveData<int[]> LiveResearch;
     private LiveData<Float> LiveVolume;
     private String plantName;
     private float volume=0.5f;
@@ -36,6 +37,7 @@ public class PlantFragment extends Fragment {
         viewModel=new ViewModel(context);
         LiveMarket=viewModel.getMarketLiveData();
         LiveVolume=viewModel.getVolumeLiveData();
+        LiveResearch=viewModel.getResearchLiveData();
         plant=new Plant(context);
         plantName = getResources().getString(R.string.Plant);
         mediaPlayerAdd=MediaPlayer.create(context,R.raw.slave_incr);
@@ -60,9 +62,7 @@ public class PlantFragment extends Fragment {
                 mediaPlayerDecr.start();
             }
         });
-
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,6 +72,9 @@ public class PlantFragment extends Fragment {
         LiveVolume.observe(getViewLifecycleOwner(),volume->{
             mediaPlayerAdd.setVolume(volume,volume);
             mediaPlayerDecr.setVolume(volume,volume);
+        });
+        LiveResearch.observe(getViewLifecycleOwner(),research->{
+            if (research[9]==1) binding.PlantImage.setImageResource(R.drawable.village);
         });
         return binding.getRoot();
     }
