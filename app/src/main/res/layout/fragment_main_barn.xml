@@ -107,7 +107,7 @@
                 android:id="@+id/Barn_Potato"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0/1000"
+                android:text="0/1000🥔"
                 android:fontFamily="@font/molot"
                 app:layout_constraintBottom_toTopOf="@+id/Barn_Progress"
                 app:layout_constraintEnd_toEndOf="@+id/Barn_Progress"

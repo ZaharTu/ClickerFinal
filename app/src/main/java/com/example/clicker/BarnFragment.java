@@ -53,7 +53,7 @@ public class BarnFragment extends Fragment {
             if (repository.incrSlavesPos(1)){
                 barn.IncrSlave();
                 binding.BarnSlaves.setText(""+barn.getSlave());
-                binding.BarnPotato.setText(repository.getPotato()+"/"+ barn.getMaxProgress());
+                binding.BarnPotato.setText(repository.getPotato()+"/"+ barn.getMaxProgress()+"\uD83E\uDD54");
                 mediaPlayerAdd.start();
             }
         });
@@ -61,11 +61,11 @@ public class BarnFragment extends Fragment {
             if (repository.decrSlavesPos(1)){
                 barn.DincrSlave();
                 binding.BarnSlaves.setText(""+barn.getSlave());
-                binding.BarnPotato.setText(repository.getPotato()+"/"+ barn.getMaxProgress());
+                binding.BarnPotato.setText(repository.getPotato()+"/"+ barn.getMaxProgress()+"\uD83E\uDD54");
                 mediaPlayerDecr.start();
             }
         });
-        binding.BarnPotato.setText(repository.getPotato()+"/"+ barn.getMaxProgress());
+        binding.BarnPotato.setText(repository.getPotato()+"/"+ barn.getMaxProgress()+"\uD83E\uDD54");
         barn.IncrMaxProgress();
         binding.BarnProgress.setProgress(repository.getPotato());
     }
@@ -89,12 +89,12 @@ public class BarnFragment extends Fragment {
         });
         LivePotato.observe(getViewLifecycleOwner(),potato->{
             barn.IncrProgress(potato);
-            binding.BarnPotato.setText(potato+"/"+ barn.getMaxProgress());
+            binding.BarnPotato.setText(potato+"/"+ barn.getMaxProgress()+"\uD83E\uDD54");
         });
         LiveMarket.observe(getViewLifecycleOwner(),market->{
             barn.IncrMaxProgress();
             binding.BarnProgress.setMax(barn.getMaxProgress());
-            binding.BarnPotato.setText(repository.getPotato()+"/"+barn.getMaxProgress());
+            binding.BarnPotato.setText(repository.getPotato()+"/"+barn.getMaxProgress()+"\uD83E\uDD54");
             binding.BarnName.setText(barnName+" УР "+market[6]);
         });
         LiveVolume.observe(getViewLifecycleOwner(),volume->{
