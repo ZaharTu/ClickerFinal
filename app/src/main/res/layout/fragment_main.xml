@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/molot"
             android:text="0/0👨‍🌾"
+            android:textColor="@color/Hint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

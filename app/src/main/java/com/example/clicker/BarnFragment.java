@@ -73,6 +73,15 @@ public class BarnFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if(LiveResearch.getValue()!=null){
+            if (LiveResearch.getValue()[2]==1) return binding.getRoot();
+        }
+        return inflater.inflate(R.layout.fragment_main_barn_b_and_w,container,false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         LiveResearch.observe(getViewLifecycleOwner(),research->{
             if (research[3]==1){
                 barn.setResearched_barn_2(true);
@@ -92,9 +101,5 @@ public class BarnFragment extends Fragment {
             mediaPlayerAdd.setVolume(volume,volume);
             mediaPlayerDecr.setVolume(volume,volume);
         });
-        if(LiveResearch.getValue()!=null){
-            if (LiveResearch.getValue()[2]==1) return binding.getRoot();
-        }
-        return inflater.inflate(R.layout.fragment_main_barn_b_and_w,container,false);
     }
 }

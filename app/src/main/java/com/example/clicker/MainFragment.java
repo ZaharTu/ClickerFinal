@@ -72,6 +72,13 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         LifecycleOwner observer = getViewLifecycleOwner();
         LiveBalance.observe(observer, balance -> {
             binding.MainBalance.setText("$"+ balance);
@@ -92,7 +99,6 @@ public class MainFragment extends Fragment {
                 handler.post(runnable);
             }
         });
-        return binding.getRoot();
     }
 
     @Override

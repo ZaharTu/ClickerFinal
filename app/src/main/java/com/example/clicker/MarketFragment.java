@@ -70,6 +70,11 @@ public class MarketFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         LiveBalance.observe(getViewLifecycleOwner(), balance -> {
             binding.MarketBalance.setText("$"+balance);
         });
@@ -77,7 +82,6 @@ public class MarketFragment extends Fragment {
             mediaPlayerBuy.setVolume(volume,volume);
             mediaPlayerError.setVolume(volume,volume);
         });
-        return binding.getRoot();
+        super.onViewCreated(view, savedInstanceState);
     }
-
 }

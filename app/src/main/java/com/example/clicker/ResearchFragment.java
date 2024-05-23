@@ -69,13 +69,18 @@ public class ResearchFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (LivePotato.getValue()!=null) binding.ResearchPotato.setText(LivePotato.getValue()+"🥔");
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         LiveBalance.observe(getViewLifecycleOwner(),balance -> {
             binding.ResearchBalance.setText("$"+balance);
         });
         LivePotato.observe(getViewLifecycleOwner(),potato -> {
             binding.ResearchPotato.setText(potato+"🥔");
         });
-        if (LivePotato.getValue()!=null) binding.ResearchPotato.setText(LivePotato.getValue()+"🥔");
-        return binding.getRoot();
+        super.onViewCreated(view, savedInstanceState);
     }
 }

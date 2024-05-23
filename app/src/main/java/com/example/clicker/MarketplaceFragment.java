@@ -67,6 +67,14 @@ public class MarketplaceFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if(LiveResearch.getValue()!=null){
+            if (LiveResearch.getValue()[5]==1) return binding.getRoot();
+        }
+        return inflater.inflate(R.layout.fragment_main_marketplace_b_and_w,container,false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         LiveMarket.observe(getViewLifecycleOwner(),market -> {
             binding.MarketPlaceName.setText(marketPlaceName+" УР "+market[6]);
         });
@@ -74,9 +82,6 @@ public class MarketplaceFragment extends Fragment {
             mediaPlayerAdd.setVolume(volume,volume);
             mediaPlayerDecr.setVolume(volume,volume);
         });
-        if(LiveResearch.getValue()!=null){
-            if (LiveResearch.getValue()[5]==1) return binding.getRoot();
-        }
-        return inflater.inflate(R.layout.fragment_main_marketplace_b_and_w,container,false);
+        super.onViewCreated(view, savedInstanceState);
     }
 }

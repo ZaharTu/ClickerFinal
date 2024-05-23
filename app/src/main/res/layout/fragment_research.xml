@@ -10,7 +10,7 @@
         android:id="@+id/Research_Balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/molot"
+        android:fontFamily="@font/abc"
         android:text="0$"
         android:textSize="30sp"
         android:textColor="@color/Hint"
@@ -22,7 +22,7 @@
         android:id="@+id/Research_Potato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/molot"
+        android:fontFamily="@font/abc"
         android:text="0🥔"
         android:textSize="30sp"
         android:textColor="@color/Hint"
@@ -36,16 +36,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:fadeScrollbars="false"
+        android:scrollbarStyle="insideOverlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHeight_percent="0.9">
+        app:layout_constraintHeight_percent="0.9"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constr_in"
             android:layout_width="match_parent"
             android:layout_height="1200dp"
-            android:background="@color/BackMain">
+            android:background="@color/BackMain"
+            android:foreground="@drawable/okantovka_recyclerview_main"
+            >
 
             <ImageButton
                 android:id="@+id/Research_Btn_Start"
