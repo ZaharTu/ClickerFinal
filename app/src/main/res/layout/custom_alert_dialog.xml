@@ -4,20 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:foreground="@drawable/okantovka_recyclerview_main"
-    >
+    android:foreground="@drawable/okantovka_recyclerview_main">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
-        android:backgroundTint="@color/ProgressBar"
-        >
+        android:backgroundTint="@color/ProgressBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/Dialog_Hint"
                 android:layout_width="wrap_content"
@@ -30,8 +28,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Dialog_Name"
-                android:layout_margin="20dp"
-                android:layout_marginStart="30dp"/>
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
             <TextView
                 android:id="@+id/Dialog_Name"
@@ -44,7 +44,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="20dp" />
 
             <Button
                 android:id="@+id/Dialog_Btn_One"
@@ -57,7 +57,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/Dialog_Cancel"
@@ -70,7 +70,8 @@
                 app:layout_constraintStart_toEndOf="@+id/Dialog_Btn_One"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp" />
+
             <Button
                 android:id="@+id/Dialog_Btn_Two"
                 android:layout_width="wrap_content"
@@ -82,7 +83,7 @@
                 app:layout_constraintStart_toEndOf="@id/Dialog_Cancel"
                 android:layout_marginBottom="10dp"
                 android:layout_marginEnd="10dp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/Dialog_cost"

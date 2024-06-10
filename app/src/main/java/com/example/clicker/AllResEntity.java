@@ -23,8 +23,8 @@ public class AllResEntity {
     private int[] market;
     @SerializedName("volume")
     private float volume;
-    @SerializedName("usableSlave")
-    private int[] usableSlave;
+    @SerializedName("usableNeighbor")
+    private int[] usableNeighbor;
     @SerializedName("potato")
     private int potato;
     @SerializedName("research")
@@ -59,11 +59,11 @@ public class AllResEntity {
     public void setVolume(float volume) {
         this.volume = volume;
     }
-    public int[] getUsableSlave() {
-        return usableSlave;
+    public int[] getUsableNeighbor() {
+        return usableNeighbor;
     }
-    public void setUsableSlave(int[] usableSlave) {
-        this.usableSlave = usableSlave;
+    public void setUsableNeighbor(int[] usableNeighbor) {
+        this.usableNeighbor = usableNeighbor;
     }
     public int getPotato() {
         return potato;

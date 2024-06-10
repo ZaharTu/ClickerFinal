@@ -46,7 +46,7 @@ public class PlantFragment extends Fragment {
         mediaPlayerDecr.setVolume(volume,volume);
         plant.setProgressBar(binding.PlantProgress);
         repository=AllResRepository.getInstance(context);
-        plant.setSlave(repository.getUsableSlave()[0]);
+        plant.setSlave(repository.getUsableNeighbor()[0]);
         binding.PlantSlaves.setText(""+plant.getSlave());
         binding.PlantPlusButton.setOnClickListener(v -> {
             if (repository.incrSlavesPos(0)){
@@ -80,7 +80,11 @@ public class PlantFragment extends Fragment {
             mediaPlayerDecr.setVolume(volume,volume);
         });
         LiveResearch.observe(getViewLifecycleOwner(),research->{
-            if (research[9]==1) binding.PlantImage.setImageResource(R.drawable.village);
+            if (research[9]==1){
+                binding.PlantImage.setImageResource(R.drawable.village);
+                plantName="Деревня";
+                binding.PlantName.setText(plantName+" УР "+LiveMarket.getValue()[4]);
+            }
         });
     }
 }

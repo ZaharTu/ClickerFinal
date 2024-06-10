@@ -25,7 +25,7 @@ public class MainFragment extends Fragment {
     private LiveData<int[]> LiveResearch;
     private LiveData<Integer> LiveGather;
     private LiveData<Float> LiveVolume;
-    private LiveData<AllRes.Slave> LiveSlave;
+    private LiveData<AllRes.Neighbor> LiveSlave;
     private AllResRepository repository;
     private MediaPlayer mediaPlayer;
     private float volume=0.5f;
@@ -56,8 +56,8 @@ public class MainFragment extends Fragment {
         mediaPlayer=MediaPlayer.create(context,R.raw.potato);
         mediaPlayer.setVolume(volume,volume);
         animPotatoBtn = AnimationUtils.loadAnimation(context, R.anim.main_potato_anim);
-        binding.MainSlaves.setText(repository.getSlave().UsableSlaveGet()
-                +"/"+repository.getSlave().AllSlave+"\uD83D\uDC68\u200D\uD83C\uDF3E");
+        binding.MainSlaves.setText(repository.getNeighbor().UsableNeighborGet()
+                +"/"+repository.getNeighbor().AllNeighbor +"\uD83D\uDC68\u200D\uD83C\uDF3E");
         binding.MainBtnGather.setText("$"+ repository.getGather());
         binding.MainBtnPotato.setOnClickListener(v -> {
             binding.MainBtnPotato.startAnimation(animPotatoBtn);
@@ -89,9 +89,9 @@ public class MainFragment extends Fragment {
         LiveGather.observe(observer, gather->{
             binding.MainBtnGather.setText("$"+ gather);
         });
-        LiveSlave.observe(observer, slave -> {
-            binding.MainSlaves.setText(slave.UsableSlaveGet()
-                    +"/"+slave.AllSlave+"\uD83D\uDC68\u200D\uD83C\uDF3E");//👨‍🌾
+        LiveSlave.observe(observer, neighbor -> {
+            binding.MainSlaves.setText(neighbor.UsableNeighborGet()
+                    +"/"+ neighbor.AllNeighbor +"\uD83D\uDC68\u200D\uD83C\uDF3E");//👨‍🌾
         });
         LiveResearch.observe(observer,research->{
             if (research[0]==1){

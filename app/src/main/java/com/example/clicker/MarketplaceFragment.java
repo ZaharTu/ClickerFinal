@@ -45,7 +45,7 @@ public class MarketplaceFragment extends Fragment {
         mediaPlayerDecr.setVolume(volume,volume);
         marketplace.setProgressBar(binding.MarketPlaceProgress);
         repository=AllResRepository.getInstance(context);
-        marketplace.setSlave(repository.getUsableSlave()[2]);
+        marketplace.setSlave(repository.getUsableNeighbor()[2]);
         binding.MarketPlaceSlaves.setText(""+marketplace.getSlave());
         binding.MarketPlacePlusButton.setOnClickListener(v -> {
             if (repository.incrSlavesPos(2)){

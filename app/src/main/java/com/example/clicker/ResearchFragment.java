@@ -30,39 +30,7 @@ public class ResearchFragment extends Fragment {
         dialog=new MyDialog();
         LiveBalance=viewModel.getBalanceLiveData();
         LivePotato=viewModel.getPotatoLiveData();
-        binding.ResearchBtnStart.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,0);
-        });
-        binding.ResearchBtnShovel1.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,1);
-        });
-        binding.ResearchBtnShovel2.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,2);
-        });
-        binding.ResearchBtnBarn.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,3);
-        });
-        binding.ResearchBtnClickUp2.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,4);
-        });
-        binding.ResearchBtnLeyka.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,5);
-        });
-        binding.ResearchBtnMarketPlace.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,6);
-        });
-        binding.ResearchBtnSlave.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,7);
-        });
-        binding.ResearchBtnTraktor.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,8);
-        });
-        binding.ResearchBtnVillage.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,9);
-        });
-        binding.ResearchBtnEnd.setOnClickListener(v -> {
-            dialog.showDialogResearch(context,10);
-        });
+        setButtonListeners();
         super.onCreate(savedInstanceState);
     }
 
@@ -83,4 +51,28 @@ public class ResearchFragment extends Fragment {
         });
         super.onViewCreated(view, savedInstanceState);
     }
+    private void setButtonListener(View button, int position) {
+        button.setOnClickListener(v -> dialog.showDialogResearch(context, position, binding.getRoot()));
+    }
+    private void setButtonListeners() {
+        int[][] buttonIdAndPosition = {
+                {R.id.Research_Btn_Start, 0},
+                {R.id.Research_Btn_Shovel1, 1},
+                {R.id.Research_Btn_Shovel2, 2},
+                {R.id.Research_Btn_Barn1, 3},
+                {R.id.Research_Btn_Barn2, 4},
+                {R.id.Research_Btn_Leyka, 5},
+                {R.id.Research_Btn_MarketPlace, 6},
+                {R.id.Research_Btn_Neighbor, 7},
+                {R.id.Research_Btn_Traktor, 8},
+                {R.id.Research_Btn_Village, 9},
+                {R.id.Research_Btn_End, 10}
+        };
+
+        for (int[] pair : buttonIdAndPosition) {
+            View button = binding.getRoot().findViewById(pair[0]);
+            setButtonListener(button, pair[1]);
+        }
+    }
+
 }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MyViewHolder>{
     ArrayList<MarketItem> marketItems;
     Context mcontext;
+    private final MyDialog myDialog= new MyDialog();
     public MarketAdapter(Context context, ArrayList<MarketItem> marketItems){
         mcontext=context;
         this.marketItems = marketItems;
@@ -45,10 +46,12 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MyViewHold
         MarketItem marketItem = marketItems.get(position);
         holder.binding.MarketImage.setImageResource(marketItem.getImage());
         holder.binding.MarketName.setText(marketItem.getNameItem());
-        holder.binding.MarketHint.setText(marketItem.getHintItem());
         holder.binding.MarketCost.setText("$"+ marketItem.getCost());
         holder.binding.MarketCount.setText(marketItem.getCountBuy()+"-ая");
         holder.binding.MarketBuy.setText("Купить");
+        holder.binding.MarketHint.setOnClickListener(v -> {
+            myDialog.showDialogHelp(mcontext,marketItem.getNameItem(),marketItem.getHintItem());
+        });
         if (position>3) {
             holder.binding.MarketCount.setText("");
             holder.binding.MarketName.setText(marketItem.getNameItem() + " УР " + marketItem.getCountBuy());

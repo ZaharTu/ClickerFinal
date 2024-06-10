@@ -20,7 +20,7 @@ public class Save {
         allResEntity.setGather(repository.getGather());
         allResEntity.setMarket(repository.getMarket());
         allResEntity.setVolume(repository.getVolume());
-        allResEntity.setUsableSlave(repository.getUsableSlave());
+        allResEntity.setUsableNeighbor(repository.getUsableNeighbor());
         allResEntity.setPotato(repository.getPotato());
         appDatabase.AllResDAO().deleteOldData();
         appDatabase.AllResDAO().insert(allResEntity);
@@ -31,7 +31,7 @@ public class Save {
             repository.setBalance(allResEntity.getBalance());
             repository.setResearch(allResEntity.getResearch());
             repository.setMarket(allResEntity.getMarket());
-            repository.setUsableSlave(allResEntity.getUsableSlave());
+            repository.setUsableSlave(allResEntity.getUsableNeighbor());
             repository.setVolume(allResEntity.getVolume());
             repository.setPotato(allResEntity.getPotato());
             repository.setGather(allResEntity.getGather());

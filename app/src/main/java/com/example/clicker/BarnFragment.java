@@ -47,7 +47,7 @@ public class BarnFragment extends Fragment {
         repository=AllResRepository.getInstance(context);
         barn=new Barn(context);
         barn.setProgressBar(binding.BarnProgress);
-        barn.setSlave(repository.getUsableSlave()[1]);
+        barn.setSlave(repository.getUsableNeighbor()[1]);
         binding.BarnSlaves.setText(""+barn.getSlave());
         binding.BarnPlusButton.setOnClickListener(v -> {
             if (repository.incrSlavesPos(1)){

@@ -12,13 +12,13 @@ public class AllResRepository {
     private final AllRes res;
     private final Context context;
     private final Random random=new Random();
-    private final AllRes.Slave slave;
+    private final AllRes.Neighbor neighbor;
     private final int[] ResearchCost;
     /**LIVE_DATA*/
     private final MutableLiveData<Integer> balanceLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> gatherLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> potatoLiveData = new MutableLiveData<>();
-    private final MutableLiveData<AllRes.Slave> slaveLiveData = new MutableLiveData<>();
+    private final MutableLiveData<AllRes.Neighbor> neighborLiveData = new MutableLiveData<>();
     private final MutableLiveData<Float> volumeLiveData = new MutableLiveData<>();
     private final MutableLiveData<int[]> marketLiveData = new MutableLiveData<>();
     private final MutableLiveData<int[]> researchLiveData = new MutableLiveData<>();
@@ -34,7 +34,7 @@ public class AllResRepository {
         this.context=context;
         ResearchCost=context.getResources().getIntArray(R.array.ResearchCost);
         res=new AllRes();
-        slave=res.slave;
+        neighbor =res.neighbor;
         save=new Save(context,this);
     }
     public void LoadOfSave(){
@@ -52,14 +52,14 @@ public class AllResRepository {
     public int getPotato() {
         return res.potato;
     }
-    public AllRes.Slave getSlave() {
-        return slave;
+    public AllRes.Neighbor getNeighbor() {
+        return neighbor;
     }
     public int[] getMarket() {
         return res.market;
     }
-    public int[] getUsableSlave() {
-        return slave.usableSlave;
+    public int[] getUsableNeighbor() {
+        return neighbor.usableNeighbor;
     }
     public float getVolume() {
         return res.volume;
@@ -77,8 +77,8 @@ public class AllResRepository {
     public MutableLiveData<Integer> getPotatoLiveData() {
         return potatoLiveData;
     }
-    public MutableLiveData<AllRes.Slave> getSlaveLiveData() {
-        return slaveLiveData;
+    public MutableLiveData<AllRes.Neighbor> getNeighborLiveData() {
+        return neighborLiveData;
     }
     public MutableLiveData<Float> getVolumeLiveData() {
         return volumeLiveData;
@@ -121,7 +121,7 @@ public class AllResRepository {
         gatherLiveData.setValue(res.gather);
     }
     public void incrBalanceMarketPlace(){
-        int decr=slave.usableSlave[2];
+        int decr= neighbor.usableNeighbor[2];
             if (decrPotato(decr)){
                 res.gather+=(10+(res.market[6])*5)*decr;
                 gatherLiveData.postValue(res.gather);
@@ -146,11 +146,11 @@ public class AllResRepository {
         if (res.research[4]==1){
             double chance= res.market[1]*0.01;
             double randomd=random.nextDouble();
-            incrGather=5+(res.market[4])*15*(slave.usableSlave[0]/10+1);
+            incrGather=5+(res.market[4])*15*(neighbor.usableNeighbor[0]/10+1);
             if (res.research[9]==1) incrGather*=2;
             if (chance>=randomd)incrGather*=2;
         }else {
-            incrGather=5+(res.market[4])*15*(slave.usableSlave[0]/10+1);
+            incrGather=5+(res.market[4])*15*(neighbor.usableNeighbor[0]/10+1);
             if (res.research[9]==1) incrGather*=2;
         }
         res.gather+=incrGather;
@@ -174,10 +174,10 @@ public class AllResRepository {
                     return true;
                 }
             }else if (position==2){
-                slave.AllSlave++;
+                neighbor.AllNeighbor++;
                 decrBalance(cost[position]*(res.market[position]/10+1));
                 incrMarket(position);
-                slaveLiveData.setValue(slave);
+                neighborLiveData.setValue(neighbor);
                 return true;
             }
             else {
@@ -197,26 +197,26 @@ public class AllResRepository {
 
     /**SLAVE*/
     public void setUsableSlave(int[] usableSlave) {
-        slave.usableSlave = usableSlave;
-        slave.AllSlave=res.market[2];
-        slaveLiveData.postValue(slave);
+        neighbor.usableNeighbor = usableSlave;
+        neighbor.AllNeighbor =res.market[2];
+        neighborLiveData.postValue(neighbor);
     }
     public boolean incrSlavesPos(int position){
         int slaveuse = 0;
-        for (int i = 0; i < slave.usableSlave.length; i++) {
-            slaveuse+=slave.usableSlave[i];
+        for (int i = 0; i < neighbor.usableNeighbor.length; i++) {
+            slaveuse+= neighbor.usableNeighbor[i];
         }
         if (slaveuse<res.market[2]){
-            slave.usableSlave[position]++;
-            slaveLiveData.setValue(slave);
+            neighbor.usableNeighbor[position]++;
+            neighborLiveData.setValue(neighbor);
             return true;
         }
         return false;
     }
     public boolean decrSlavesPos(int position){
-        if (slave.usableSlave[position]>0){
-            slave.usableSlave[position]--;
-            slaveLiveData.setValue(slave);
+        if (neighbor.usableNeighbor[position]>0){
+            neighbor.usableNeighbor[position]--;
+            neighborLiveData.setValue(neighbor);
             return true;
         }
         return false;
@@ -235,30 +235,30 @@ public class AllResRepository {
             potatoAdd=(1+res.market[3]*2+res.market[4]);
         }
         if (res.research[3]==1 &&
-                res.potato+potatoAdd<(res.market[5]*1000+slave.usableSlave[1]*500)){
+                res.potato+potatoAdd<(res.market[5]*1000+ neighbor.usableNeighbor[1]*500)){
             res.potato+=potatoAdd;
             potatoLiveData.postValue(res.potato);
         }else if (res.research[3]==0 &&
-                res.potato+potatoAdd<(res.market[5]*1000+slave.usableSlave[1]*250) ) {
+                res.potato+potatoAdd<(res.market[5]*1000+ neighbor.usableNeighbor[1]*250) ) {
             res.potato+=potatoAdd;
             potatoLiveData.postValue(res.potato);
         }
     }
     public void MaxPotato(){
         if (res.research[3]==1 &&
-                res.potato>(res.market[5]*1000+slave.usableSlave[1]*500)){
-            res.potato=res.market[5]*1000+slave.usableSlave[1]*500;
+                res.potato>(res.market[5]*1000+ neighbor.usableNeighbor[1]*500)){
+            res.potato=res.market[5]*1000+ neighbor.usableNeighbor[1]*500;
             potatoLiveData.setValue(res.potato);
         } else if (res.research[3]==0 &&
-                res.potato>(res.market[5]*1000+slave.usableSlave[1]*250) ) {
-            res.potato=res.market[5]*1000+slave.usableSlave[1]*250;
+                res.potato>(res.market[5]*1000+ neighbor.usableNeighbor[1]*250) ) {
+            res.potato=res.market[5]*1000+ neighbor.usableNeighbor[1]*250;
             potatoLiveData.setValue(res.potato);
         }
     }
     public boolean decrPotato(int decr){
         if (res.potato>=decr){
             res.potato-=decr;
-            potatoLiveData.setValue(res.potato);
+            potatoLiveData.postValue(res.potato);
             return true;
         }
         return false;

@@ -29,7 +29,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
                 <ImageView
                     android:id="@+id/Market_Image"
                     android:layout_width="match_parent"
@@ -54,36 +53,36 @@
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginTop="5dp" />
 
-            <TextView
+            <ImageButton
                 android:id="@+id/Market_Hint"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/abc"
                 android:gravity="center"
-                android:text="hint"
-                android:textColor="@color/Hint"
+                android:backgroundTint="@color/BackMain"
+                android:background="@drawable/button_design"
                 app:layout_constraintBottom_toTopOf="@+id/Market_Buy"
                 app:layout_constraintStart_toEndOf="@+id/imagecard"
                 app:layout_constraintTop_toBottomOf="@+id/Market_Name"
-                app:layout_constraintWidth_percent="0.3" />
+                app:layout_constraintWidth_percent="0.2"
+                app:layout_constraintHeight_percent="0.3"
+                android:src="@drawable/information_chat_svgrepo_com"/>
 
             <TextView
                 android:id="@+id/Market_Cost"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
-                app:layout_constraintWidth_percent="0.2"
-                app:layout_constraintHeight_percent="0.2"
                 android:fontFamily="@font/molot"
                 android:gravity="center"
                 android:text="48$"
                 android:textColor="@color/Hint"
                 app:layout_constraintBottom_toTopOf="@+id/Market_Count"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.2"
                 app:layout_constraintStart_toEndOf="@+id/Market_Hint"
-                app:layout_constraintTop_toTopOf="parent"
-                 />
+                app:layout_constraintTop_toBottomOf="@+id/Market_Name"
+                app:layout_constraintWidth_percent="0.2" />
 
             <Button
                 android:id="@+id/Market_Buy"

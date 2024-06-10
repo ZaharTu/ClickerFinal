@@ -19,7 +19,7 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder>{
     private final MyDialog myDialog= new MyDialog();
     int[] Help_Image = {R.drawable.potatobg,R.drawable.what,
             R.drawable.money, R.drawable.shovel, R.drawable.leyka,
-            R.drawable.slave, R.drawable.traktor,R.drawable.plant,
+            R.drawable.neighbor, R.drawable.traktor,R.drawable.plant,
             R.drawable.barn, R.drawable.market,R.drawable.scientist};
 
     public HelpAdapter(Context mcontext) {

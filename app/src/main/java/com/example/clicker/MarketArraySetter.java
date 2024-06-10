@@ -5,20 +5,18 @@ import android.content.Context;
 import java.util.ArrayList;
 
 public class MarketArraySetter {
-    private Context mcontext;
-    private ArrayList<MarketItem> marketItem_Array;
+    private final ArrayList<MarketItem> marketItem_Array;
     protected int[] itemsCost;
     protected String[] itemsName;
     protected String[] itemsHint;
     int[] itemsImage = {R.drawable.shovel, R.drawable.leyka,
-            R.drawable.slave,
+            R.drawable.neighbor,
             R.drawable.traktor,R.drawable.plant,R.drawable.barn,R.drawable.market};
     public MarketArraySetter(Context context, int[] market){
-        mcontext=context;
         marketItem_Array = new ArrayList<>();
-        itemsCost=mcontext.getResources().getIntArray(R.array.MarketCost);
-        itemsName=mcontext.getResources().getStringArray(R.array.MarketName);
-        itemsHint=mcontext.getResources().getStringArray(R.array.MarketHint);
+        itemsCost= context.getResources().getIntArray(R.array.MarketCost);
+        itemsName= context.getResources().getStringArray(R.array.MarketName);
+        itemsHint= context.getResources().getStringArray(R.array.MarketHint);
         for (int i = 0; i < itemsImage.length; i++) {
             marketItem_Array.add(new MarketItem(itemsName[i],
                     itemsHint[i],

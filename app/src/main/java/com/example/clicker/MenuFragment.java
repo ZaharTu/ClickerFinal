@@ -23,6 +23,10 @@ public class MenuFragment extends Fragment {
         binding=FragmentMenuBinding.inflate(getLayoutInflater());
         NavController controller = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
         repository=AllResRepository.getInstance(getContext());
+        binding.buttonDebug.setOnClickListener(v -> {
+            repository.setPotato(100000);
+            repository.setBalance(10000000);
+        });
         binding.btnHelp.setOnClickListener(v -> {
             controller.navigate(R.id.action_menuFragment_to_helpFragment);
         });

@@ -58,10 +58,18 @@ public class MarketFragment extends Fragment {
                 mediaPlayerBuy.start();
             }else{
                 mediaPlayerError.start();
-                Snackbar.make(binding.getRoot(),R.string.Dont_Buy,Snackbar.LENGTH_SHORT)
-                        .setBackgroundTint(getResources().getColor
-                                (R.color.ProgressBar, getContext().getTheme()))
-                        .show();
+                if (position!=1&&repository.getMarket()[1]==50){
+                    Snackbar.make(binding.getRoot(),"Это максимум",Snackbar.LENGTH_SHORT)
+                            .setBackgroundTint(getResources().getColor
+                                    (R.color.ProgressBar, getContext().getTheme()))
+                            .show();
+                }else {
+                    Snackbar.make(binding.getRoot(),R.string.Dont_Buy,Snackbar.LENGTH_SHORT)
+                            .setBackgroundTint(getResources().getColor
+                                    (R.color.ProgressBar, getContext().getTheme()))
+                            .show();
+                }
+
             }
         });
 

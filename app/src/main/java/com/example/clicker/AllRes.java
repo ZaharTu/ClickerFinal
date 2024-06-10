@@ -1,7 +1,7 @@
 package com.example.clicker;
 
 public class AllRes {
-    protected Slave slave= new Slave();
+    protected Neighbor neighbor = new Neighbor();
     public AllRes() {
     }
     protected int balance=0;
@@ -10,13 +10,13 @@ public class AllRes {
     protected float volume=0.5f;
     protected int potato=0;
     protected int[] research=new int[10];
-    public static class Slave{
-        int[] usableSlave=new int[3];
-        int AllSlave=0;
-        public int UsableSlaveGet(){
+    public static class Neighbor {
+        int[] usableNeighbor =new int[3];
+        int AllNeighbor =0;
+        public int UsableNeighborGet(){
             int slaves = 0;
-            for (int i = 0; i < usableSlave.length; i++) {
-                slaves+=usableSlave[i];
+            for (int j : usableNeighbor) {
+                slaves += j;
             }
             return slaves;
         }

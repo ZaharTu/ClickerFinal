@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class MyDialog {
     protected  TextView Dialog_TV_Name,Dialog_TV_Hint,Dialog_TV_Cost;
     protected  Button Dialog_Btn_One,Dialog_Btn_Two,Dialog_Btn_Cancel;
@@ -31,7 +33,7 @@ public class MyDialog {
         Dialog_TV_Hint.setText(message);
         return dialog;
     }
-    public void showDialogResearch(Context context,int position){
+    public void showDialogResearch(Context context,int position,View parent){
         String title = context.getResources().getStringArray(R.array.ResearchName)[position];
         String about = context.getResources().getStringArray(R.array.ResearchAbout)[position];
         int Cost = 0;
@@ -55,6 +57,12 @@ public class MyDialog {
             Dialog_Btn_One.setText("Изучить");
             Dialog_Btn_One.setOnClickListener(v -> {
                 if (repository.TryResearch(position - 1)) dialog.dismiss();
+                else {
+                    Snackbar.make(parent,"Недостаточно средств",Snackbar.LENGTH_SHORT)
+                            .setBackgroundTint(context.getResources().getColor
+                                    (R.color.ProgressBar, context.getTheme()))
+                            .show();
+                }
             });
         }
         Dialog_Btn_Cancel.setOnClickListener(v -> dialog.dismiss());
