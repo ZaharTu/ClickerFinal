@@ -31,6 +31,7 @@ public class LoadingActivity extends AppCompatActivity{
                     throw new RuntimeException(e);
                 }
                 runOnUiThread(()->{
+                    if (progress==99) binding.LoadingPotato.setAnimation(null);
                     binding.LoadingProgressTxt.setText(progress+"%");
                     binding.LoadingProgress.setProgress(progress);
                 });

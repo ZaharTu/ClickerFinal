@@ -22,7 +22,7 @@ public class MarketplaceFragment extends Fragment {
     private AllResRepository repository;
     private ViewModel viewModel;
     private MutableLiveData<int[]> LiveMarket;
-    private MutableLiveData<int[]> LiveResearch;
+    private MutableLiveData<boolean[]> LiveResearch;
     private LiveData<Float> LiveVolume;
     private String marketPlaceName;
     private float volume=0.5f;
@@ -37,7 +37,7 @@ public class MarketplaceFragment extends Fragment {
         marketPlaceName = getResources().getString(R.string.Market);
         viewModel=new ViewModel(context);
         LiveMarket=viewModel.getMarketLiveData();
-        LiveVolume=viewModel.getVolumeLiveData();
+        LiveVolume=viewModel.getVolumeAllLiveData();
         LiveResearch=viewModel.getResearchLiveData();
         mediaPlayerAdd=MediaPlayer.create(context,R.raw.slave_incr);
         mediaPlayerAdd.setVolume(volume,volume);
@@ -68,7 +68,7 @@ public class MarketplaceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(LiveResearch.getValue()!=null){
-            if (LiveResearch.getValue()[5]==1) return binding.getRoot();
+            if (LiveResearch.getValue()[5]) return binding.getRoot();
         }
         return inflater.inflate(R.layout.fragment_main_marketplace_b_and_w,container,false);
     }

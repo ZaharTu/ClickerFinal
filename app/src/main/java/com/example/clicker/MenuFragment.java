@@ -23,20 +23,35 @@ public class MenuFragment extends Fragment {
         binding=FragmentMenuBinding.inflate(getLayoutInflater());
         NavController controller = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
         repository=AllResRepository.getInstance(getContext());
-        binding.buttonDebug.setOnClickListener(v -> {
-            repository.setPotato(100000);
-            repository.setBalance(10000000);
-        });
         binding.btnHelp.setOnClickListener(v -> {
             controller.navigate(R.id.action_menuFragment_to_helpFragment);
         });
-        binding.seekBar.setProgress((int)(repository.getVolume()*100));
-        binding.txtVolume.setText((int) (repository.getVolume()*100)+"%");
-        binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        binding.debug.setOnClickListener(v -> {
+            repository.setBalance(1000000000);
+            repository.setPotato(500);
+        });
+        binding.seekBarAllMusic.setProgress((int)(repository.getVolumeAll()*100));
+        binding.VolumeAllPercent.setText((int) (repository.getVolumeAll()*100)+"%");
+        binding.seekBarAllMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                repository.setVolume(((float) progress)/100);
-                binding.txtVolume.setText(progress+"%");
+                repository.setVolumeAll(((float) progress)/100);
+                binding.VolumeAllPercent.setText(progress+"%");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+        binding.seekBarBackMusic.setProgress((int)(repository.getVolumeBack()*100));
+        binding.VolumeBackPercent.setText((int) (repository.getVolumeBack()*100)+"%");
+        binding.seekBarBackMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                repository.setVolumeBack(((float) progress)/100);
+                binding.VolumeBackPercent.setText(progress+"%");
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {

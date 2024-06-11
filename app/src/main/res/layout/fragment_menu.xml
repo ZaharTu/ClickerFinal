@@ -5,7 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BackMain">
-
+    <Button
+        android:id="@+id/debug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_design"
+        android:text="Дебаг"
+        android:textSize="30sp"
+        android:fontFamily="@font/molot"
+        android:visibility="gone"
+        />
     <TextView
         android:id="@+id/txtMenu"
         android:layout_width="wrap_content"
@@ -29,10 +38,10 @@
         android:layout_marginTop="75dp"/>
 
     <TextView
-        android:id="@+id/Volume"
+        android:id="@+id/VolumeAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Громкость"
+        android:text="Громкость эффектов"
         android:fontFamily="@font/molot"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +50,7 @@
         android:layout_marginTop="75dp"/>
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/seekBarAllMusic"
         style="@style/seekBar"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -49,11 +58,10 @@
         android:progress="50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Volume"
+        app:layout_constraintTop_toBottomOf="@+id/VolumeAll"
         android:layout_marginTop="25dp"/>
-
     <TextView
-        android:id="@+id/txtVolume"
+        android:id="@+id/VolumeAllPercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="50%"
@@ -61,14 +69,43 @@
         android:fontFamily="@font/molot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarAllMusic"
         android:layout_marginTop="25dp"/>
 
-    <Button
-        android:id="@+id/buttonDebug"
+    <TextView
+        android:id="@+id/VolumeBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:fontFamily="@font/molot"
+        android:text="Громкость фоновой музыки"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/VolumeAllPercent"
+        android:layout_marginTop="75dp"/>
+
+    <SeekBar
+        android:id="@+id/seekBarBackMusic"
+        style="@style/seekBar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VolumeBack"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/VolumeBackPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/molot"
+        android:text="50%"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarBackMusic"
+        android:layout_marginTop="25dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

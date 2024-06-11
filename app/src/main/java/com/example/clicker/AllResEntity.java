@@ -21,14 +21,18 @@ public class AllResEntity {
     private int gather;
     @SerializedName("market")
     private int[] market;
-    @SerializedName("volume")
-    private float volume;
+    @SerializedName("volumeAll")
+    private float volumeAll;
+    @SerializedName("volumeBack")
+    private float volumeBack;
     @SerializedName("usableNeighbor")
     private int[] usableNeighbor;
     @SerializedName("potato")
     private int potato;
+    @SerializedName("time")
+    private long time;
     @SerializedName("research")
-    private int[] research;
+    private boolean[] research;
     public int getId() {
         return id;
     }
@@ -53,11 +57,11 @@ public class AllResEntity {
     public void setMarket(int[] market) {
         this.market = market;
     }
-    public float getVolume() {
-        return volume;
+    public float getVolumeAll() {
+        return volumeAll;
     }
-    public void setVolume(float volume) {
-        this.volume = volume;
+    public void setVolumeAll(float volumeAll) {
+        this.volumeAll = volumeAll;
     }
     public int[] getUsableNeighbor() {
         return usableNeighbor;
@@ -71,22 +75,42 @@ public class AllResEntity {
     public void setPotato(int potato) {
         this.potato = potato;
     }
-    public int[] getResearch() {
+    public boolean[] getResearch() {
         return research;
     }
-    public void setResearch(int[] research) {
+    public void setResearch(boolean[] research) {
         this.research = research;
     }
-
+    public float getVolumeBack() {
+        return volumeBack;
+    }
+    public void setVolumeBack(float volumeBack) {
+        this.volumeBack = volumeBack;
+    }
+    public long getTime() {
+        return time;
+    }
+    public void setTime(long time) {
+        this.time = time;
+    }
     @TypeConverters({Converters.class})
     public static class Converters {
         @TypeConverter
-        public static int[] fromString(String value) {
+        public static int[] fromStringInt(String value) {
             Type type = new TypeToken<int[]>() {}.getType();
             return new Gson().fromJson(value, type);
         }
         @TypeConverter
+        public static boolean[] fromStringBoolean(String value) {
+            Type type = new TypeToken<boolean[]>() {}.getType();
+            return new Gson().fromJson(value, type);
+        }
+        @TypeConverter
         public static String fromIntArray(int[] array) {
+            return new Gson().toJson(array);
+        }
+        @TypeConverter
+        public static String fromBooleanArray(boolean[] array) {
             return new Gson().toJson(array);
         }
     }

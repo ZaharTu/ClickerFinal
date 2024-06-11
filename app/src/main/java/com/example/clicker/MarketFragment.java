@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,13 +32,10 @@ public class MarketFragment extends Fragment {
         super.onCreate(savedInstanceState);
         binding = FragmentMarketBinding.inflate(getLayoutInflater());
         Context context = getContext();
-        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
+
         model=new ViewModel(context);
         LiveBalance= model.getBalanceLiveData();
-        LiveVolume=model.getVolumeLiveData();
+        LiveVolume=model.getVolumeAllLiveData();
         repository = AllResRepository.getInstance(context);
         mediaPlayerBuy=MediaPlayer.create(context,R.raw.buy);
         mediaPlayerBuy.setVolume(0.5f,0.5f);

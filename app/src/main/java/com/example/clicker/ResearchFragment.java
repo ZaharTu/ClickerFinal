@@ -64,7 +64,7 @@ public class ResearchFragment extends Fragment {
                 {R.id.Research_Btn_Leyka, 5},
                 {R.id.Research_Btn_MarketPlace, 6},
                 {R.id.Research_Btn_Neighbor, 7},
-                {R.id.Research_Btn_Traktor, 8},
+                {R.id.Research_Btn_Tractor, 8},
                 {R.id.Research_Btn_Village, 9},
                 {R.id.Research_Btn_End, 10}
         };

@@ -11,16 +11,18 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
     private final MutableLiveData<Integer> gatherLiveData;
     private final MutableLiveData<Integer> potatoLiveData;
     private final MutableLiveData<AllRes.Neighbor> slaveLiveData;
-    private final MutableLiveData<Float> volumeLiveData;
+    private final MutableLiveData<Float> volumeAllLiveData;
+    private final MutableLiveData<Float> volumeBackLiveData;
     private final MutableLiveData<int[]> marketLiveData;
-    private final MutableLiveData<int[]> researchLiveData;
+    private final MutableLiveData<boolean[]> researchLiveData;
     public ViewModel(Context context) {
         AllResRepository repository = AllResRepository.getInstance(context);
         potatoLiveData= repository.getPotatoLiveData();
         balanceLiveData= repository.getBalanceLiveData();
         gatherLiveData= repository.getGatherLiveData();
         slaveLiveData= repository.getNeighborLiveData();
-        volumeLiveData= repository.getVolumeLiveData();
+        volumeAllLiveData= repository.getVolumeAllLiveData();
+        volumeBackLiveData= repository.getVolumeBackLiveData();
         marketLiveData= repository.getMarketLiveData();
         researchLiveData= repository.getResearchLiveData();
     }
@@ -37,13 +39,16 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
     public MutableLiveData<AllRes.Neighbor> getSlaveLiveData() {
         return slaveLiveData;
     }
-    public MutableLiveData<Float> getVolumeLiveData() {
-        return volumeLiveData;
+    public MutableLiveData<Float> getVolumeAllLiveData() {
+        return volumeAllLiveData;
+    }
+    public MutableLiveData<Float> getVolumeBackLiveData() {
+        return volumeBackLiveData;
     }
     public MutableLiveData<int[]> getMarketLiveData() {
         return marketLiveData;
     }
-    public MutableLiveData<int[]> getResearchLiveData() {
+    public MutableLiveData<boolean[]> getResearchLiveData() {
         return researchLiveData;
     }
 }

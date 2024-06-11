@@ -23,7 +23,7 @@ public class PlantFragment extends Fragment {
     private AllResRepository repository;
     private ViewModel viewModel;
     private MutableLiveData<int[]> LiveMarket;
-    private MutableLiveData<int[]> LiveResearch;
+    private MutableLiveData<boolean[]> LiveResearch;
     private LiveData<Float> LiveVolume;
     private String plantName;
     private float volume=0.5f;
@@ -36,7 +36,7 @@ public class PlantFragment extends Fragment {
         context=getContext();
         viewModel=new ViewModel(context);
         LiveMarket=viewModel.getMarketLiveData();
-        LiveVolume=viewModel.getVolumeLiveData();
+        LiveVolume=viewModel.getVolumeAllLiveData();
         LiveResearch=viewModel.getResearchLiveData();
         plant=new Plant(context);
         plantName = getResources().getString(R.string.Plant);
@@ -80,7 +80,7 @@ public class PlantFragment extends Fragment {
             mediaPlayerDecr.setVolume(volume,volume);
         });
         LiveResearch.observe(getViewLifecycleOwner(),research->{
-            if (research[9]==1){
+            if (research[9]){
                 binding.PlantImage.setImageResource(R.drawable.village);
                 plantName="Деревня";
                 binding.PlantName.setText(plantName+" УР "+LiveMarket.getValue()[4]);

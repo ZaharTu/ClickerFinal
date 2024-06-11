@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/abc"
         android:gravity="center_horizontal"
-        android:text="0"
+        android:text="$0"
         android:textSize="30sp"
         android:textColor="@color/Hint"
         app:layout_constraintEnd_toEndOf="parent"

@@ -19,9 +19,11 @@ public class Save {
         allResEntity.setResearch(repository.getResearch());
         allResEntity.setGather(repository.getGather());
         allResEntity.setMarket(repository.getMarket());
-        allResEntity.setVolume(repository.getVolume());
+        allResEntity.setVolumeAll(repository.getVolumeAll());
+        allResEntity.setVolumeBack(repository.getVolumeBack());
         allResEntity.setUsableNeighbor(repository.getUsableNeighbor());
         allResEntity.setPotato(repository.getPotato());
+        allResEntity.setTime(System.currentTimeMillis());
         appDatabase.AllResDAO().deleteOldData();
         appDatabase.AllResDAO().insert(allResEntity);
     }
@@ -32,9 +34,11 @@ public class Save {
             repository.setResearch(allResEntity.getResearch());
             repository.setMarket(allResEntity.getMarket());
             repository.setUsableSlave(allResEntity.getUsableNeighbor());
-            repository.setVolume(allResEntity.getVolume());
+            repository.setVolumeAll(allResEntity.getVolumeAll());
+            repository.setVolumeBack(allResEntity.getVolumeBack());
             repository.setPotato(allResEntity.getPotato());
             repository.setGather(allResEntity.getGather());
+            repository.timeBefore= allResEntity.getTime();
         }
     }
 

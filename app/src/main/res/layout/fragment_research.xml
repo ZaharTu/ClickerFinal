@@ -48,7 +48,7 @@
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1200dp"
+            android:layout_height="match_parent"
             android:background="@color/BackMain"
             android:foreground="@drawable/okantovka_recyclerview_main"
             >
@@ -68,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/Start"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/scientist" />
@@ -88,6 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/Shovel1"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/shovel" />
@@ -109,6 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/Shovel2"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/shovel" />
@@ -129,6 +132,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/Barn1"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/barn" />
@@ -149,6 +153,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/Barn2"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/barn" />
@@ -169,6 +174,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/WateringCan"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/leyka" />
@@ -190,9 +196,31 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/MarketPlace"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/market" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_Research_Btn_Neighbor"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/card_Research_Btn_Village"
+                app:layout_constraintEnd_toStartOf="@+id/card_Research_Btn_Village"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_Research_Btn_MarketPlace">
+                <ImageButton
+                    android:id="@+id/Research_Btn_Neighbor"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/Neighbor"
+                    android:foreground="@drawable/okantovka_recyclerview_main"
+                    android:background="@drawable/button_design_research"
+                    app:srcCompat="@drawable/neighbor" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -211,33 +239,14 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/Village"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/village" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_Research_Btn_Neighbor"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:cardCornerRadius="50dp"
-                app:cardElevation="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/card_Research_Btn_Village"
-                app:layout_constraintEnd_toStartOf="@+id/card_Research_Btn_Village"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_Research_Btn_MarketPlace">
-                <ImageButton
-                    android:id="@+id/Research_Btn_Neighbor"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:foreground="@drawable/okantovka_recyclerview_main"
-                    android:background="@drawable/button_design_research"
-                    app:srcCompat="@drawable/neighbor" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_Research_Btn_Traktor"
+                android:id="@+id/card_Research_Btn_Tractor"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 app:cardCornerRadius="50dp"
@@ -248,10 +257,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/card_Research_Btn_MarketPlace">
 
                 <ImageButton
-                    android:id="@+id/Research_Btn_Traktor"
+                    android:id="@+id/Research_Btn_Tractor"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
+                    android:contentDescription="@string/Tractor"
                     android:foreground="@drawable/okantovka_recyclerview_main"
                     android:background="@drawable/button_design_research"
                     app:srcCompat="@drawable/traktor" />
@@ -272,6 +282,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/End"
                 android:foreground="@drawable/okantovka_recyclerview_main"
                 android:background="@drawable/button_design_research"
                 app:srcCompat="@drawable/scientist"

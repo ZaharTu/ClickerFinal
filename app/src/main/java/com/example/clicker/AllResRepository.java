@@ -1,6 +1,7 @@
 package com.example.clicker;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -14,14 +15,16 @@ public class AllResRepository {
     private final Random random=new Random();
     private final AllRes.Neighbor neighbor;
     private final int[] ResearchCost;
+    public long timeBefore;
     /**LIVE_DATA*/
     private final MutableLiveData<Integer> balanceLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> gatherLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> potatoLiveData = new MutableLiveData<>();
     private final MutableLiveData<AllRes.Neighbor> neighborLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Float> volumeLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Float> volumeAllLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Float> volumeBackLiveData = new MutableLiveData<>();
     private final MutableLiveData<int[]> marketLiveData = new MutableLiveData<>();
-    private final MutableLiveData<int[]> researchLiveData = new MutableLiveData<>();
+    private final MutableLiveData<boolean[]> researchLiveData = new MutableLiveData<>();
 
 
     public static AllResRepository getInstance(Context context) {
@@ -61,10 +64,13 @@ public class AllResRepository {
     public int[] getUsableNeighbor() {
         return neighbor.usableNeighbor;
     }
-    public float getVolume() {
-        return res.volume;
+    public float getVolumeAll() {
+        return res.volumeAll;
     }
-    public int[] getResearch(){return res.research;}
+    public float getVolumeBack() {
+        return res.volumeBack;
+    }
+    public boolean[] getResearch(){return res.research;}
     public AllRes getRes() {
         return res;
     }
@@ -80,28 +86,42 @@ public class AllResRepository {
     public MutableLiveData<AllRes.Neighbor> getNeighborLiveData() {
         return neighborLiveData;
     }
-    public MutableLiveData<Float> getVolumeLiveData() {
-        return volumeLiveData;
+    public MutableLiveData<Float> getVolumeAllLiveData() {
+        return volumeAllLiveData;
+    }
+    public MutableLiveData<Float> getVolumeBackLiveData() {
+        return volumeBackLiveData;
     }
     public MutableLiveData<int[]> getMarketLiveData() {
         return marketLiveData;
     }
-    public MutableLiveData<int[]> getResearchLiveData() {
+    public MutableLiveData<boolean[]> getResearchLiveData() {
         return researchLiveData;
     }
 
 
-    /**VOLUME*/
-    public void setVolume(float volume) {
-        res.volume = volume;
-        volumeLiveData.postValue(res.volume);
+    /**VOLUMEALL*/
+    public void setVolumeAll(float volume) {
+        res.volumeAll = volume;
+        volumeAllLiveData.postValue(res.volumeAll);
     }
-
-
+    /**VOLUMEALL*/
+    public void setVolumeBack(float volume) {
+        res.volumeBack = volume;
+        volumeBackLiveData.postValue(res.volumeBack);
+    }
     /**BALANCE*/
     public void setBalance(int balance) {
         res.balance = balance;
         balanceLiveData.postValue(res.balance);
+        Log.d("aboba",""+balance);
+    }
+    public int[] incrBalanceTime(){
+        long time = System.currentTimeMillis()-timeBefore;
+        int timeabsence = (int) (time/60000);
+        int incrBalance=0;
+        if (neighbor.usableNeighbor[0]>0) incrBalance=(5 + res.market[4] * 15 * (neighbor.usableNeighbor[0] / 10 + 1))*timeabsence;
+        return new int[]{timeabsence, incrBalance};
     }
     public void incrBalanceClick(){
         double chance= res.market[1]*0.01;
@@ -141,21 +161,24 @@ public class AllResRepository {
         res.gather = gather;
         gatherLiveData.postValue(res.gather);
     }
-    public void incrGatherPlant(){
-        int incrGather;
-        if (res.research[4]==1){
-            double chance= res.market[1]*0.01;
-            double randomd=random.nextDouble();
-            incrGather=5+(res.market[4])*15*(neighbor.usableNeighbor[0]/10+1);
-            if (res.research[9]==1) incrGather*=2;
-            if (chance>=randomd)incrGather*=2;
-        }else {
-            incrGather=5+(res.market[4])*15*(neighbor.usableNeighbor[0]/10+1);
-            if (res.research[9]==1) incrGather*=2;
+    public void incrGatherPlant() {
+        int incrGather = 5 + res.market[4] * 15 * (neighbor.usableNeighbor[0] / 10 + 1);
+        if (res.research[4]) {
+            double chance = res.market[1] * 0.01;
+            double randomd = random.nextDouble();
+            if (chance >= randomd) {
+                incrGather *= 2;
+            }
         }
-        res.gather+=incrGather;
+
+        if (res.research[9]) {
+            incrGather *= 2;
+        }
+
+        res.gather += incrGather;
         gatherLiveData.postValue(res.gather);
     }
+
 
 
 
@@ -166,28 +189,31 @@ public class AllResRepository {
     }
     public boolean incrCountBuy(int position) {
         int[] cost = context.getResources().getIntArray(R.array.MarketCost);
-        if (res.balance>=(cost[position]* (res.market[position]/10+1))) {
-            if (position==1){
-                if (res.market[1]<50){
-                    decrBalance(cost[position]* (res.market[position]/10+1));
+        int currentCost = cost[position] * (res.market[position] / 10 + 1);
+        if (res.balance >= currentCost) {
+            switch (position) {
+                case 1:
+                    if (res.market[1] < 50) {
+                        decrBalance(currentCost);
+                        incrMarket(position);
+                        return true;
+                    }
+                    break;
+                case 2:
+                    neighbor.AllNeighbor++;
+                    decrBalance(currentCost);
+                    incrMarket(position);
+                    neighborLiveData.setValue(neighbor);
+                    return true;
+                default:
+                    decrBalance(currentCost);
                     incrMarket(position);
                     return true;
-                }
-            }else if (position==2){
-                neighbor.AllNeighbor++;
-                decrBalance(cost[position]*(res.market[position]/10+1));
-                incrMarket(position);
-                neighborLiveData.setValue(neighbor);
-                return true;
-            }
-            else {
-                decrBalance(cost[position]*(int)(res.market[position]/10+1));
-                incrMarket(position);
-                return true;
             }
         }
         return false;
     }
+
     public void incrMarket(int position){
         res.market[position]++;
         marketLiveData.setValue(res.market);
@@ -230,29 +256,23 @@ public class AllResRepository {
         potatoLiveData.postValue(res.potato);
     }
     public void incrPotato(){
-        int potatoAdd=(1+res.market[3]+res.market[4]);
-        if (res.research[7]==1){
-            potatoAdd=(1+res.market[3]*2+res.market[4]);
+        int potatoAdd = 1 + res.market[3] + res.market[4];
+        if (res.research[7]) {
+            potatoAdd = 1 + res.market[3] * 2 + res.market[4];
         }
-        if (res.research[3]==1 &&
-                res.potato+potatoAdd<(res.market[5]*1000+ neighbor.usableNeighbor[1]*500)){
-            res.potato+=potatoAdd;
-            potatoLiveData.postValue(res.potato);
-        }else if (res.research[3]==0 &&
-                res.potato+potatoAdd<(res.market[5]*1000+ neighbor.usableNeighbor[1]*250) ) {
-            res.potato+=potatoAdd;
-            potatoLiveData.postValue(res.potato);
-        }
+
+        int maxPotato = res.market[5] * 1000 + neighbor.usableNeighbor[1] * (res.research[4] ? 500 : 250);
+        res.potato = Math.min(res.potato + potatoAdd, maxPotato);
+
+        potatoLiveData.postValue(res.potato);
     }
-    public void MaxPotato(){
-        if (res.research[3]==1 &&
-                res.potato>(res.market[5]*1000+ neighbor.usableNeighbor[1]*500)){
-            res.potato=res.market[5]*1000+ neighbor.usableNeighbor[1]*500;
-            potatoLiveData.setValue(res.potato);
-        } else if (res.research[3]==0 &&
-                res.potato>(res.market[5]*1000+ neighbor.usableNeighbor[1]*250) ) {
-            res.potato=res.market[5]*1000+ neighbor.usableNeighbor[1]*250;
-            potatoLiveData.setValue(res.potato);
+    public void MaxPotato() {
+        if (res.research[2]) {
+            int maxPotato = res.market[5] * 1000 + neighbor.usableNeighbor[1] * (res.research[4] ? 500 : 250);
+            if (res.potato > maxPotato) {
+                res.potato = maxPotato;
+                potatoLiveData.setValue(res.potato);
+            }
         }
     }
     public boolean decrPotato(int decr){
@@ -265,44 +285,32 @@ public class AllResRepository {
     }
 
     /**RESEARCH*/
-    public void setResearch(int[] research){
+    public void setResearch(boolean[] research){
         res.research=research;
         researchLiveData.postValue(research);
     }
     private void ResearchPos(int position){
-        res.research[position]=1;
+        res.research[position]=true;
         researchLiveData.setValue(res.research);
     }
     public boolean getResearched(int position){
-        return res.research[position] == 1;
+        return res.research[position];
     }
-    public boolean TryResearch(int position){
-        switch (position){
-            case 0:
-            case 1:
-            case 2:
-                if (res.research[position]<1){
-                    if (decrBalance(ResearchCost[position])){
-                        ResearchPos(position);
-                        return true;
-                }
+    public boolean TryResearch(int position) {
+        if (!res.research[position]) {
+            boolean success = false;
 
+            if (position <= 2) {
+                success = decrBalance(ResearchCost[position]);
+            } else if (position <= 9) {
+                success = decrPotato(ResearchCost[position]);
             }
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-                if (res.research[position]<1){
-                    if (decrPotato(ResearchCost[position])){
-                        ResearchPos(position);
-                        return true;
-                    }
-                }
-
+            if (success) {
+                ResearchPos(position);
+                return true;
+            }
         }
         return false;
     }
+
 }

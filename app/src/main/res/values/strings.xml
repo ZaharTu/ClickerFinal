@@ -1,19 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Potato Farmer</string>
-    <string name="UPSpeed" translatable="false">Ускорить</string>
-    <string name="Potato" translatable="false">Жёлтая картошка</string>
-    <string name="Plant" translatable="false">Плантация</string>
-    <string name="Barn" translatable="false">Амбар</string>
-    <string name="Market" translatable="false">Рынок</string>
+    <string name="app_name">Ты - фермер</string>
+    <string name="Potato">Картошка</string>
+    <string name="Plant">Плантация</string>
+    <string name="Barn">Амбар</string>
+    <string name="Market">Рынок</string>
+    <string name="HelpMenu">Подсказки по игре 🤓</string>
+    <string name="help_cancel">Нажмите *назад* чтобы попасть в меню</string>
+    <string name="Dont_Buy">Не хватает денег</string>
+    <string name="Offline">Оффлайн доход</string>
+    <!-- ВНИЗУ УЛУЧШЕНИЯ-->
+    <string name="Start">Стартовое улучшение</string>
+    <string name="Shovel1">Лопата уровень 1</string>
+    <string name="Shovel2">Лопата уровень 2</string>
+    <string name="Barn1">Амбар уровень 1</string>
+    <string name="Barn2">Амбар уровень 2</string>
+    <string name="WateringCan">Лейка улучшение</string>
+    <string name="MarketPlace">Открыть рынок</string>
+    <string name="Neighbor">Соседи улучшение</string>
+    <string name="Village">Деревня улучшение</string>
+    <string name="Tractor">Трактор улучшение</string>
+    <string name="End">Конечное улучшение</string>
+    <!-- НАВЕРХУ УЛУЧШЕНИЯ-->
+    <string name="research" translatable="false">Research</string>
+    <string name="main" translatable="false">Main</string>
+    <string name="market" translatable="false">Market</string>
+    <string name="menu" translatable="false">Menu</string>
     <string name="plus" translatable="false">+</string>
-    <string name="HelpMenu" translatable="false">Подсказки по игре 🤓</string>
-    <string name="Progress" translatable="false">Прогресс 💼</string>
-    <string name="help_cancel" translatable="false">Нажмите *назад* чтобы попасть в меню</string>
-    <string name="Dont_Buy" translatable="false">Не хватает денег</string>
-    <string name="research">Research</string>
-    <string name="main">Main</string>
-    <string name="market">Market</string>
-    <string name="menu">Menu</string>
+
     <string-array name="MarketName">
         <item>Лопата</item>
         <item>Лейка</item>

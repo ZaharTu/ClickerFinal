@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -50,22 +51,43 @@ public class MyDialog {
             researched= repository.getResearched(position-1);
             Dialog_TV_Cost.setText(Cost+"🥔");
         }
-        if (researched||position==0){
+        if (researched){
             Dialog_Btn_One.setText("Изучено");
             Dialog_Btn_One.setBackgroundColor(context.getColor(R.color.BottomNavRipple));
+        }
+        else if (position==0){
+            Dialog_Btn_One.setVisibility(View.GONE);
         }else{
             Dialog_Btn_One.setText("Изучить");
             Dialog_Btn_One.setOnClickListener(v -> {
-                if (repository.TryResearch(position - 1)) dialog.dismiss();
+                if (repository.TryResearch(position - 1)){
+                    dialog.dismiss();
+                    MediaPlayer.create(context,R.raw.sound_of_successful).start();
+                }
                 else {
                     Snackbar.make(parent,"Недостаточно средств",Snackbar.LENGTH_SHORT)
                             .setBackgroundTint(context.getResources().getColor
                                     (R.color.ProgressBar, context.getTheme()))
                             .show();
+                    MediaPlayer.create(context,R.raw.error).start();
                 }
             });
         }
         Dialog_Btn_Cancel.setOnClickListener(v -> dialog.dismiss());
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+    public void showDialogAbsence(Context context,int time, int incr){
+        String title = context.getResources().getString(R.string.Offline);
+        String timeAbsence = (time / 60) + ":" + ((time % 60) < 10 ? "0" : "") + (time % 60);
+        repository = AllResRepository.getInstance(context);
+        String about = "За время вашего отсутствия (" + timeAbsence + ") ваши соседи заработали $" + incr;
+        Dialog dialog = SetUpDialog(context, title, about);
+        Dialog_Btn_Cancel.setText("Собрать");
+        Dialog_Btn_Cancel.setOnClickListener(v -> {
+            dialog.dismiss();
+            repository.setBalance(repository.getBalance()+incr);
+        });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }

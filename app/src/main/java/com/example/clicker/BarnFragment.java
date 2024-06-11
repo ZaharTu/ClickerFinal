@@ -22,7 +22,7 @@ public class BarnFragment extends Fragment {
     private AllResRepository repository;
     private ViewModel viewModel;
     private MutableLiveData<int[]> LiveMarket;
-    private MutableLiveData<int[]> LiveResearch;
+    private MutableLiveData<boolean[]> LiveResearch;
     private LiveData<Integer> LivePotato;
     private LiveData<Float> LiveVolume;
     private String barnName;
@@ -37,7 +37,7 @@ public class BarnFragment extends Fragment {
         barnName=getResources().getString(R.string.Barn);
         viewModel=new ViewModel(context);
         LiveMarket=viewModel.getMarketLiveData();
-        LiveVolume=viewModel.getVolumeLiveData();
+        LiveVolume=viewModel.getVolumeAllLiveData();
         LivePotato=viewModel.getPotatoLiveData();
         LiveResearch=viewModel.getResearchLiveData();
         mediaPlayerAdd=MediaPlayer.create(context,R.raw.slave_incr);
@@ -74,7 +74,7 @@ public class BarnFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(LiveResearch.getValue()!=null){
-            if (LiveResearch.getValue()[2]==1) return binding.getRoot();
+            if (LiveResearch.getValue()[2]) return binding.getRoot();
         }
         return inflater.inflate(R.layout.fragment_main_barn_b_and_w,container,false);
     }
@@ -83,7 +83,7 @@ public class BarnFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LiveResearch.observe(getViewLifecycleOwner(),research->{
-            if (research[3]==1){
+            if (research[3]){
                 barn.setResearched_barn_2(true);
             }
         });

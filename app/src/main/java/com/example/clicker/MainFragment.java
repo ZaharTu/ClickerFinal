@@ -20,41 +20,39 @@ import com.example.clicker.databinding.FragmentMainBinding;
 
 public class MainFragment extends Fragment {
     private FragmentMainBinding binding;
-    private ViewModel model;
     private LiveData<Integer> LiveBalance;
-    private LiveData<int[]> LiveResearch;
+    private LiveData<boolean[]> LiveResearch;
     private LiveData<Integer> LiveGather;
     private LiveData<Float> LiveVolume;
     private LiveData<AllRes.Neighbor> LiveSlave;
     private AllResRepository repository;
     private MediaPlayer mediaPlayer;
-    private float volume=0.5f;
     private int delay = 5000;
     private final Handler handler = new Handler();
     private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            repository.incrBalanceClick();
             handler.postDelayed(this, delay);
+            repository.incrBalanceClick();
         }
     };
 
     private Animation animPotatoBtn;
-    private Context context;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= FragmentMainBinding.inflate(getLayoutInflater());
-        context=getContext();
-        model=new ViewModel(context);
+        Context context = getContext();
+        ViewModel model = new ViewModel(context);
         repository=AllResRepository.getInstance(context);
-        LiveBalance=model.getBalanceLiveData();
-        LiveGather=model.getGatherLiveData();
-        LiveVolume= model.getVolumeLiveData();
-        LiveSlave=model.getSlaveLiveData();
-        LiveResearch=model.getResearchLiveData();
+        LiveBalance= model.getBalanceLiveData();
+        LiveGather= model.getGatherLiveData();
+        LiveVolume= model.getVolumeAllLiveData();
+        LiveSlave= model.getSlaveLiveData();
+        LiveResearch= model.getResearchLiveData();
         mediaPlayer=MediaPlayer.create(context,R.raw.potato);
-        mediaPlayer.setVolume(volume,volume);
+        float volume = 0.5f;
+        mediaPlayer.setVolume(volume, volume);
         animPotatoBtn = AnimationUtils.loadAnimation(context, R.anim.main_potato_anim);
         binding.MainSlaves.setText(repository.getNeighbor().UsableNeighborGet()
                 +"/"+repository.getNeighbor().AllNeighbor +"\uD83D\uDC68\u200D\uD83C\uDF3E");
@@ -67,6 +65,9 @@ public class MainFragment extends Fragment {
         binding.MainBtnGather.setOnClickListener(v -> {
             repository.incrBalanceGather();
         });
+        int[]absence =repository.incrBalanceTime();
+        MyDialog myDialog = new MyDialog();
+        myDialog.showDialogAbsence(context,absence[0],absence[1]);
     }
 
     @Nullable
@@ -94,8 +95,8 @@ public class MainFragment extends Fragment {
                     +"/"+ neighbor.AllNeighbor +"\uD83D\uDC68\u200D\uD83C\uDF3E");//👨‍🌾
         });
         LiveResearch.observe(observer,research->{
-            if (research[0]==1){
-                if (research[1]==1) delay=2500;
+            if (research[0]){
+                if (research[1]) delay=2500;
                 handler.post(runnable);
             }
         });
