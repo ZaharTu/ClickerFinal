@@ -41,7 +41,10 @@ private MediaPlayer mediaPlayer;
         musicThread.start();
         volumeData.observe(this, volumeMusic-> mediaPlayer.setVolume(volumeMusic,volumeMusic));
         startService(new Intent(this,SaveService.class));
-
+        int[]absence= getIntent().getIntArrayExtra("absence");
+        MyDialog myDialog = new MyDialog();
+        assert absence != null;
+        myDialog.showDialogAbsence(this,absence[0],absence[1]);
     }
     @Override
     protected void onPause() {

@@ -65,15 +65,12 @@ public class MainFragment extends Fragment {
         binding.MainBtnGather.setOnClickListener(v -> {
             repository.incrBalanceGather();
         });
-        int[]absence =repository.incrBalanceTime();
-        MyDialog myDialog = new MyDialog();
-        myDialog.showDialogAbsence(context,absence[0],absence[1]);
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         return binding.getRoot();
     }
 

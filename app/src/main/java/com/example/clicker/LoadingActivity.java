@@ -13,6 +13,7 @@ public class LoadingActivity extends AppCompatActivity{
     private ActivityLoadingBinding binding;
     private int progress=0;
     private AllResRepository repository;
+    private int[] absence;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +32,17 @@ public class LoadingActivity extends AppCompatActivity{
                     throw new RuntimeException(e);
                 }
                 runOnUiThread(()->{
-                    if (progress==99) binding.LoadingPotato.setAnimation(null);
+                    if (progress==97){
+                        binding.LoadingPotato.setAnimation(null);
+                        absence =repository.incrBalanceTime();
+                    }
                     binding.LoadingProgressTxt.setText(progress+"%");
                     binding.LoadingProgress.setProgress(progress);
                 });
                 progress++;
             }
             Intent intent = new Intent(LoadingActivity.this,MainActivity.class);
+            intent.putExtra("absence",absence);
             startActivity(intent);
         }).start();
     }

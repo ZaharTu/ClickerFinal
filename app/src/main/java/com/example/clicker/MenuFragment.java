@@ -27,7 +27,7 @@ public class MenuFragment extends Fragment {
             controller.navigate(R.id.action_menuFragment_to_helpFragment);
         });
         binding.debug.setOnClickListener(v -> {
-            repository.setBalance(1000000000);
+            repository.setBalance(10000);
             repository.setPotato(500);
         });
         binding.seekBarAllMusic.setProgress((int)(repository.getVolumeAll()*100));

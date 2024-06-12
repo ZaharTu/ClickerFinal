@@ -1,7 +1,6 @@
 package com.example.clicker;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -114,13 +113,14 @@ public class AllResRepository {
     public void setBalance(int balance) {
         res.balance = balance;
         balanceLiveData.postValue(res.balance);
-        Log.d("aboba",""+balance);
     }
     public int[] incrBalanceTime(){
         long time = System.currentTimeMillis()-timeBefore;
         int timeabsence = (int) (time/60000);
         int incrBalance=0;
-        if (neighbor.usableNeighbor[0]>0) incrBalance=(5 + res.market[4] * 15 * (neighbor.usableNeighbor[0] / 10 + 1))*timeabsence;
+        if (neighbor.usableNeighbor[0]>0){
+            incrBalance=(5 + res.market[4] * 15 * (neighbor.usableNeighbor[0] / 10 + 1))*timeabsence;
+        }
         return new int[]{timeabsence, incrBalance};
     }
     public void incrBalanceClick(){
