@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="13dp"
         android:backgroundTint="@color/ProgressBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout

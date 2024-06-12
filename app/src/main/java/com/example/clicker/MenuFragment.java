@@ -26,10 +26,6 @@ public class MenuFragment extends Fragment {
         binding.btnHelp.setOnClickListener(v -> {
             controller.navigate(R.id.action_menuFragment_to_helpFragment);
         });
-        binding.debug.setOnClickListener(v -> {
-            repository.setBalance(10000);
-            repository.setPotato(500);
-        });
         binding.seekBarAllMusic.setProgress((int)(repository.getVolumeAll()*100));
         binding.VolumeAllPercent.setText((int) (repository.getVolumeAll()*100)+"%");
         binding.seekBarAllMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
